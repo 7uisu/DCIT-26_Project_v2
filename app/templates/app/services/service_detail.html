@@ -1,0 +1,10 @@
+{% extends "app/base.html" %}
+{% block content %}
+<h1>{{ service.name }}</h1>
+<p>Category: {{ service.category.name }}</p>
+<p>Description: {{ service.description }}</p>
+<p>Price: ${{ service.price }}</p>
+<a href="{% url 'service-update' service.id %}">Edit</a>
+<a href="{% url 'service-delete' service.id %}">Delete</a>
+<a href="{% url 'service-list' %}">Back to List</a>
+{% endblock %}

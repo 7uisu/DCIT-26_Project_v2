@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+  <h2>Service Categories</h2>
+  <ul>
+    {% for category in categories %}
+      <li>
+        <a href="{% url 'service-category-detail' category.pk %}">{{ category.name }}</a>
+        <a href="{% url 'service-category-update' category.pk %}">Edit</a>
+        <a href="{% url 'service-category-delete' category.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'service-category-create' %}">Add New Category</a>
+{% endblock %}

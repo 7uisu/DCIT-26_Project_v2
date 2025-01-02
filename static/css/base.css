@@ -1,8 +1,482 @@
-h1 {
-    color: rgb(29, 172, 182);
+html {
+	scroll-behavior: smooth;
+	/*overflow-x: hidden;     Hide Bottom Scrollbar*/
+	/*overflow: hidden;*/	/* Hide scrollbar */
 }
 
-.mylogo {
-    height: 300px;
-    width: auto;
+
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f9f9f0; /* Light background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Open Sans', sans-serif; /* Apply Open Sans font */
+}
+
+/* Logo Styling */
+.navbar-logo img {
+    height: 50px;
+}
+
+/* Center Menu Items */
+.navbar-center ul {
+    list-style: none;
+    display: flex;
+    gap: 48px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-center ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400; /* Regular weight */
+}
+
+.navbar-center ul li a:hover{
+    color: #000000;
+}
+
+/* Right Section Buttons */
+.navbar-right {
+    display: flex;
+    gap: 48px; /* Set gap between "Sign In" and "Feedback" buttons */
+    margin-right: 50px; /* Add margin to prevent overlapping with the scrollbar */
+}
+
+
+/* Sign In Button */
+.sign-in-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    padding: 5px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: white;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal; /* Using 'normal' for clarity */
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+}
+
+.sign-in-btn:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow on hover */
+}
+
+.sign-in-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Feedback Button */
+.feedback-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #7FD8D4; /* Teal background */
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400; /* Using 'bold' for emphasis */
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+}
+
+.feedback-btn:hover {
+    background-color: #5ac8a5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow on hover */
+}
+
+/* Home Section */
+#section1 {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevent content from spilling outside the section */
+}
+
+.section1-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Background should be below everything */
+    overflow: hidden; /* Prevent the image from overflowing its container */
+}
+
+.section1-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire section */
+    object-position: center; /* Centers the image within the section */
+    transform: scale(1.1); /* Slightly zoom the image for a dynamic effect */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.section1-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 254, 245, 1) 100%);
+    z-index: 1; /* Ensure the overlay is above the background image but below the content */
+}
+
+.section1-content {
+    position: relative;
+    z-index: 2; /* Content should always be above the overlay and background */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    text-align: center; /* Center align text */
+    width: 100%;
+    height: 100%;
+    padding: 1rem; /* Add padding for better spacing on smaller screens */
+}
+
+.home-main-text {
+    margin-bottom: 3rem; /* Add space between text and button */
+}
+
+.home-main-text h1 {
+    font-size: 8rem;
+    color: #000; /* Dark color for text */
+    margin: 0.5rem 0; /* Space between lines */
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.learn-more-btn {
+    padding: 20px 70px;
+    border: none;
+    border-radius: 50px;
+    background-color: #7FD8D4; /* Teal background */
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Merriweather', serif; /* Apply font-family here */
+    font-weight: 400; /* Set to Merriweather Light */
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+}
+
+
+.learn-more-btn:hover {
+    background-color: #5ac8a5;
+    transform: translateY(-2px); /* Slight lift on hover for interactivity */
+}
+
+#section2 {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    flex-direction: column; /* Ensures content stacks vertically */
+    overflow: hidden;
+}
+
+
+/* Services Section */
+.services-section {
+    text-align: center;
+    background-color: #FFFEF5;
+    width: 100%; /* Ensure it takes full width of the parent container */
+}
+
+/* Section Title */
+.section-title {
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+    font-size: 50px;
+    margin-bottom: 20px;
+    margin-top: 0; /* Reset margin to avoid adding extra space at the top */
+}
+
+/* Service Tabs */
+.service-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Sansation', sans-serif;
+                                                
+}
+
+.tab-btn:hover {
+    background-color: #e6f7f4;
+}
+
+.tab-btn.active {
+    background-color: #7FD8D4;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.service-category-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Service Cards */
+.services-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.service-card {
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.service-card img {
+    width: 100%;
+    height: 70%;
+    display: block;
+}
+
+.service-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+}
+
+.service-card p {
+    font-size: 14px;
+    color: #666;
+    padding: 0 15px 10px;
+    font-family: 'Sansation', sans-serif;
+    font-weight: 700;
+                                                
+}
+
+.learn-more-link {
+    display: block;
+    font-size: 14px;
+    color: #7FD8D4;
+    text-decoration: none;
+    padding: 0 15px 15px;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+}
+
+.learn-more-link:hover {
+    text-decoration: underline;
+}
+
+/* View All Services Button */
+.view-all-services {
+    margin-top: 40px;
+}
+
+.view-all-btn {
+    padding: 20px 70px;
+    border: none;
+    border-radius: 50px;
+    background-color: #7FD8D4; /* Teal background */
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Merriweather', serif;
+    font-weight: 400; /* Using 'bold' for emphasis */
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+}
+
+.view-all-btn:hover {
+    background-color: #5ac8a5;
+}
+
+/* Footer */
+.footer {
+    background-color: #454545;
+    color: #fff;
+    padding: 2rem 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Footer Content */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo Section */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-logo img {
+    width: 60px; /* Adjusted logo size for better visibility */
+}
+
+/* Text Container */
+.footer-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns text to the left */
+    gap: 0.5rem;
+}
+
+.footer-cavite-text {
+    font-size: 36px;
+    font-family: "Marcellus SC", serif;
+    font-weight: 400;
+    color: #fff;
+}
+
+.footer-skin-sol-text {
+    font-size: 28px;
+    font-family: "Marcellus SC", serif;
+    font-weight: 400;
+    color: #fff;
+}
+
+/* Link Styles */
+.footer-logo a,
+.footer-cavite-text a,
+.footer-skin-sol-text a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Navigation Links */
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center; /* Center-align links on smaller screens */
+}
+
+.footer-links div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ddd;
+}
+
+/* Social Icon */
+.social-icon {
+    width: 24px; /* Increased size for better visibility */
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.footer-bottom hr {
+    border: 0;
+    border-top: 1px solid #444;
+    margin: 1rem 0;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-logo {
+        margin-bottom: 1rem;
+    }
+
+    .footer-links {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .footer-cavite-text {
+        font-size: 28px; /* Reduced size for smaller screens */
+    }
+
+    .footer-skin-sol-text {
+        font-size: 22px; /* Reduced size for smaller screens */
+    }
+
+    .footer-logo img {
+        width: 50px; /* Smaller logo for compact view */
+    }
+
+    .footer-links {
+    }
 }

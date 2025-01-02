@@ -4,12 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Website{% endblock %}</title>
+    <title>{% block title %}Cavite Skin Solutions{% endblock %}</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{% static 'images/LOWGO_TRANSPARENT.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon/Skin_Clinic_Logo.ico' %}" type="image/x-icon">
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/sansation" rel="stylesheet">
+                
+
 </head>
 <body>
 
@@ -19,10 +29,9 @@
             
     {% endblock %}
 
+    {% include 'app/footer.html' %}
+
     <script src="{% static 'js/base.js' %}"></script>
 
-    <footer>
-        <p>&copy; 2024 My Website</p>
-    </footer>
 </body>
 </html>

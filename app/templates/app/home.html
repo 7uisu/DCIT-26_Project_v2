@@ -4,7 +4,65 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>Welcome to My Website</h1>
-    <p>This is the home page. Enjoy exploring the site!</p>
-    <img class="mylogo" src="{% static 'images/LOWGO_TRANSPARENT.png'%}">
+<!-- Home Section -->
+<div id="section1">
+    <!-- Background Image -->
+    <div class="section1-background">
+        <img src="{% static 'images/Green_BG.png' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="section1-overlay"></div>
+
+    <!-- Content -->
+    <div class="section1-content fade-in">
+        <!-- Home Main Text -->
+        <div class="home-main-text">
+            <h1>Your Trusted</h1>
+            <h1>Partner In</h1>
+            <h1>Skin Health</h1>
+        </div>
+        
+        <!-- Learn More Button -->
+        <div class="learn-more-button">
+            <a href="#section2" class="learn-more-btn">Learn More</a>
+        </div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<div id="section2" class="services-section">
+    <h2 class="section-title">Our Services</h2>
+
+    <!-- Service Categories Tabs -->
+    <div class="service-tabs">
+        {% for category in categories %}
+            <button class="tab-btn {% if forloop.first %}active{% endif %}" data-category-id="{{ category.id }}">{{ category.name }}</button>
+        {% endfor %}
+    </div>
+
+    <!-- Services List -->
+    <div class="services-list">
+        {% for category in categories %}
+            <div class="service-category-section {% if not forloop.first %}hidden{% endif %}" id="category-{{ category.id }}">
+                {% for service in category.services.all %}
+                    <div class="service-card">
+                        <img src="{% if service.image %}{{ service.image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" alt="{{ service.name }}">
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.description }}</p>
+                        <a href="{% url 'service-detail' service.pk %}" class="learn-more-link">Learn More →</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    
+
+
+    <!-- View All Services -->
+    <div class="view-all-services">
+        <a href="{% url 'service-list' %}" class="view-all-btn">See our full list of Services</a>
+    </div>
+</div>
+
 {% endblock %}

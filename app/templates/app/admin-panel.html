@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+ 
+<div id="section-admin-panel" class="admin-panel">
+    <h1>Admin Panel - Services</h1>
+    <a href="{% url 'service-create' %}" class="btn btn-primary mb-3">Add New Service</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ service.category.name }}</td>
+                <td>{{ service.name }}</td>
+                <td>{{ service.description|truncatewords:10 }}</td>
+                <td>${{ service.price }}</td>
+                <td>
+                    <a href="{% url 'service-detail' service.id %}" class="btn btn-info btn-sm">View</a>
+                    <a href="{% url 'service-update' service.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'service-delete' service.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No services available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "app/base.html" %}
+{% block content %}
+<h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Service</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'service-list' %}">Cancel</a>
+{% endblock %}

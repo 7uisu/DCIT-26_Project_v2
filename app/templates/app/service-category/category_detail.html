@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+  <h2>Service Category: {{ category.name }}</h2>
+  <p><strong>Description:</strong> {{ category.description }}</p>
+
+  <h3>Services in this category:</h3>
+  <ul>
+    {% for service in category.services.all %}
+      <li>
+        <a href="{% url 'service-detail' service.pk %}">{{ service.name }}</a> - {{ service.price }} 
+      </li>
+    {% empty %}
+      <li>No services in this category yet.</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'service-category-list' %}">Back to Categories List</a>
+{% endblock %}
