@@ -1,0 +1,37 @@
+{% load static %}
+
+<!-- Side Navbar -->
+<div class="sidebar">
+    <!-- Logo at the top -->
+    <div class="sidebar-logo">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/Skin_Clinic_Logo.png' %}" alt="Admin-Logo">
+        </a>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="sidebar-nav">
+        <li><a href="{% url 'admin-dashboard' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Dashboard.png' %}" alt="Dashboard Icon"> <span>Dashboard</span></a></li>
+        <li><a href="{% url 'admin-staff-management' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Staff_Management.png' %}" alt="Staff Management Icon"> <span>Staff Management</span></a></li>
+        <li><a href="{% url 'admin-appointments' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Appointments.png' %}" alt="Appointments Icon"> <span>Appointments</span></a></li>
+        <li><a href="{% url 'admin-consultations' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Consultation.png' %}" alt="Consultations Icon"> <span>Consultations</span></a></li>
+        <li><a href="{% url 'admin-staff-schedule' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Staff_Sched.png' %}" alt="Staff Schedule Icon"> <span>Staff Schedule</span></a></li>
+        <li><a href="{% url 'admin-service-category' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Services_Category.png' %}" alt="Services Category Icon"> <span>Services Category</span></a></li>
+        <li><a href="{% url 'admin-services' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Services.png' %}" alt="Services Icon"> <span>Services</span></a></li>
+        <li><a href="{% url 'admin-medical-histories' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Medical_History.png' %}" alt="Medical History Icon"> <span>Medical Histories</span></a></li>
+        <li><a href="{% url 'admin-medical-conditions' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Medical_Condition.png' %}" alt="Medical Conditions Icon"> <span>Medical Conditions</span></a></li>
+        <li><a href="{% url 'admin-patient-records' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Patient_Records.png' %}" alt="Patient Records Icon"> <span>Patient Records</span></a></li>
+        <li><a href="{% url 'admin-clinic-review' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Patient_Records.png' %}" alt="Clinic Review"> <span>Clinic Review</span></a></li>
+        {% comment %} <li><a href="{% url 'admin-settings' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Settings.png' %}" alt="Settings Icon"> <span>Settings</span></a></li> {% endcomment %}
+        <li><a href="{% url 'admin-reports' %}" class="sidebar-item"><img src="{% static 'images/Admin_Icons/Report.png' %}" alt="Reports Icon"> <span>Reports</span></a></li>
+        <li>
+            <a href="#" class="sidebar-item" onclick="document.getElementById('logout-form').submit();">
+                <img src="{% static 'images/Admin_Icons/Logout.png' %}" alt="Logout Icon"> 
+                <span>Logout</span>
+            </a>
+            <form id="logout-form" method="POST" action="{% url 'logout' %}" style="display: none;">
+                {% csrf_token %}
+            </form>
+        </li>
+    </ul>
+</div>

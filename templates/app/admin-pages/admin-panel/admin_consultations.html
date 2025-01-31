@@ -1,0 +1,41 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-consultation-page">
+<h2>Consultations List</h2>
+
+<a href="{% url 'admin-consultation-create' %}">Create New Consultation</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Consultation Date</th>
+            <th>Summary</th>
+            <th>Prescription Given</th>
+            <th>Follow-up Needed</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consultation in consultation_list %}
+        <tr>
+            <td>{{ consultation.consultation_date }}</td>
+            <td>{{ consultation.summary }}</td>
+            <td>{{ consultation.prescription_given }}</td>
+            <td>{{ consultation.follow_up_needed }}</td>
+            <td>
+                <a href="{% url 'admin-consultation-detail' consultation.pk %}">View</a> |
+                <a href="{% url 'admin-consultation-update' consultation.pk %}">Edit</a> |
+                <a href="{% url 'admin-consultation-delete' consultation.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No consultations found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

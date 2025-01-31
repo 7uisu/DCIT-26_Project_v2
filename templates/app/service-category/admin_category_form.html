@@ -1,0 +1,13 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-category-form-page">
+  <h2>{% if object %}Edit{% else %}Create{% endif %} Service Category</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'admin-service-category' %}">Back to List</a>
+</div>
+{% endblock %}

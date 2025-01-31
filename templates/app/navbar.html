@@ -1,0 +1,53 @@
+{% load static %}
+
+<nav class="navbar">
+    <!-- Logo Section -->
+    <div class="navbar-logo">
+        <a class="navbar-logo-link" href="{% url 'home' %}">
+            <img src="{% static 'images/Skin_Clinic_Logo.png' %}" alt="Logo">
+        </a>
+    </div>
+
+    <!-- Navbar Menu Items -->
+    <div class="navbar-center">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li class="dropdown">
+                <a class="dropbtn">Services</a>
+                <ul class="dropdown-content">
+                    {% for category in service_categories %}
+                        <li><a href="{% url 'service-category-detail' category.id %}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>            
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+
+            <!-- Admin Dashboard link for IT Staff or Administrator -->
+            {% if is_admin_or_it_staff %}
+                <li><a href="{% url 'admin-dashboard' %}">Admin Dashboard</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+
+
+    <!-- Right Section with Buttons -->
+    <div class="navbar-right">
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="sign-in-btn">
+                    <img src="{% static 'images/logout.png' %}" alt="Logout Icon" class="sign-in-icon">
+                    Logout
+                </button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="sign-in-btn">
+                <img src="{% static 'images/Person-Icon.png' %}" alt="Sign In Icon" class="sign-in-icon">
+                Sign In
+            </a>
+        {% endif %}
+        <a href="{% url 'clinic-review-create' %}" class="feedback-btn">Give Us Feedback!</a>
+    </div>
+</nav>

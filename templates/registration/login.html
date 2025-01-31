@@ -1,0 +1,65 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section-login-page">
+    <!-- Background Image -->
+    <div class="login-page-background">
+        <img src="{% static 'images/Clinic.png' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="login-page-overlay"></div>
+    
+    <!-- Login Form Container -->
+    <div class="login-page-container">
+        <!-- Login Form -->
+        <div class="login-form-wrapper">
+            <h2 class="login-title">Log In</h2>
+            <p class="login-subtitle">Welcome back! Please enter your details.</p>
+            
+            <!-- Form -->
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                
+                <!-- Username Input -->
+                <div class="form-group">
+                    <p class="login-username-text">Username</p>
+                    <input type="text" name="username" class="login-input-field" placeholder="Enter Username" required>
+                </div>
+            
+                <!-- Password Input -->
+                <div class="form-group">
+                    <p class="login-password-text">Password</p>
+                    <input type="password" name="password" class="login-input-field" placeholder="Enter Password" required>
+                </div>
+            
+                <!-- Forgot Password and Login Button in separate containers -->
+                <div class="form-group">
+                    <a href="{% url 'password-reset' %}" class="forgot-password">Forgot password?</a>
+                </div>                
+
+                <div class="form-group">
+                    <button type="submit" class="login-button">Log In</button>
+                </div>
+            </form>
+            
+    
+            <!-- Social Login -->
+            <p class="continue-with">Or Continue With</p>
+            <div class="social-login-buttons">
+                <button class="social-button google-btn">Google</button>
+                <button class="social-button facebook-btn">Facebook</button>
+            </div>
+            <p class="signup-text">Don't have an account? <a href="{% url 'sign-up' %}" class="signup-link">Sign up</a></p>
+        </div>
+    
+        <!-- Right Image -->
+        <div class="login-page-right-image">
+            <img src="{% static 'images/Pic2.jpg' %}" alt="Design Image">
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-appointment-detail-page">
+<h2>Appointment Details</h2>
+
+<p><strong>Patient:</strong> {{ appointment.patient }}</p>
+<p><strong>Doctor:</strong> {{ appointment.doctor }}</p>
+<p><strong>Start Time:</strong> {{ appointment.start_time }}</p>
+<p><strong>End Time:</strong> {{ appointment.end_time }}</p>
+<p><strong>Reason for Visit:</strong> {{ appointment.reason_for_visit }}</p>
+<p><strong>Service:</strong> {{ appointment.service }}</p>
+<p><strong>Status:</strong> {{ appointment.status }}</p>
+
+<a href="{% url 'admin-appointment-update' appointment.pk %}">Edit</a> |
+<a href="{% url 'admin-appointment-delete' appointment.pk %}">Delete</a> |
+<a href="{% url 'admin-appointments' %}">Back to Appointments</a>
+</div>
+{% endblock %}

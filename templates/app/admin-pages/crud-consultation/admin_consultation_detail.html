@@ -1,0 +1,17 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-consultation-detail-page">
+<h2>Consultation Details</h2>
+
+<p><strong>Date:</strong> {{ consultation.consultation_date }}</p>
+<p><strong>Summary:</strong> {{ consultation.summary }}</p>
+<p><strong>Prescription Given:</strong> {{ consultation.prescription_given }}</p>
+<p><strong>Follow-up Needed:</strong> {{ consultation.follow_up_needed }}</p>
+<p><strong>Patient Records:</strong> {{ consultation.patient_records }}</p>
+
+<a href="{% url 'admin-consultation-update' consultation.pk %}">Edit</a> |
+<a href="{% url 'admin-consultation-delete' consultation.pk %}">Delete</a> |
+<a href="{% url 'admin-consultations' %}">Back to Consultations</a>
+</div>
+{% endblock %}

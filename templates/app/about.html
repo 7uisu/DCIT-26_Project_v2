@@ -1,0 +1,100 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<!-- About Section 1-->
+<div id="about-section1">
+    <!-- Background Image -->
+    <div class="about-section1-background">
+        <img src="{% static 'images/Clinic.png' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="about-section1-overlay"></div>
+
+    <!-- Content -->
+    <div class="about-section1-content fade-in">
+        <!-- Left Image -->
+        <div class="about-section1-left-image">
+            <img src="{% static 'images/9.png' %}" alt="Design Image">
+        </div>
+
+        <!-- Text Content -->
+        <div class="about-section1-text-content">
+            <!-- Title and Description Wrapper -->
+            <div class="about-section1-text-wrapper">
+                <h2 class="about-section1-title">Who We Are</h2>
+                <p class="about-section1-description">
+                    At <strong>Cavite Skin Solutions,</strong> we’ve been committed to providing exceptional dermatological care since <strong>August 19, 2003</strong>. Our clinic was established with a mission to deliver <strong>personalized, effective, and compassionate care,</strong> helping our patients achieve healthy and glowing skin.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Section 2 -->
+<div id="about-section2">
+    <!-- Background Image -->
+    <div class="about-section2-background"></div>
+
+    <!-- Content -->
+    <div class="about-section2-content fade-in">
+
+        <!-- Text Content -->
+        <div class="about-section2-text-content">
+            <!-- Title and Description Wrapper -->
+            <div class="about-section2-text-wrapper">
+                <p class="about-section2-description">
+                    <strong>We believe that every patient deserves the highest standard of care,</strong> combining modern treatments with proven expertise. Our team of skilled professionals works tirelessly to create a welcoming environment where <strong>your comfort and confidence are our top priorities.</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Image -->
+        <div class="about-section2-right-image">
+            <img src="{% static 'images/pexels-tima-miroshnichenko-5452189.jpg' %}" alt="Design Image">
+        </div>
+
+    </div>
+</div>
+
+<!-- About Section -->
+<div id="about-section3">
+
+        <!-- Background Image -->
+        <div class="about-section3-background">
+            <img src="{% static 'images/Green_BG.png' %}" alt="Background Image" class="background">
+        </div>
+    
+        <!-- Overlay -->
+        <div class="about-section3-overlay"></div>
+
+    <div class="about-section3-content fade-in">
+        <p class="about-section3-description fade-in">
+            With <strong>state-of-the-art facilities</strong> and a <strong>focus on continuous innovation,</strong> we strive to <strong>stay at the forefront of dermatology.</strong> Whether you need <strong>medical, cosmetic, or preventative skin care,</strong> we are here to guide you every step of the way.
+        </p>
+        <div class="slider fade-in">
+            <div class="slide-track fade-in">
+                <div class="slide fade-in"><img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}"></div>
+                <div class="slide fade-in"><img src="{% static 'images/8.png' %}"></div>
+                <div class="slide fade-in"><img src="{% static 'images/pexels-pixabay-263201.jpg' %}"></div>
+                <div class="slide fade-in"><img src="{% static 'images/pexels-cristian-rojas-8459996.jpg' %}"></div>
+                <div class="slide fade-in"><img src="{% static 'images/pexels-pavel-danilyuk-7108319.jpg' %}"></div>
+                <!-- Duplicate images for continuous effect -->
+                <div class="slide"><img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}"></div>
+                <div class="slide"><img src="{% static 'images/8.png' %}"></div>
+                <div class="slide"><img src="{% static 'images/pexels-pixabay-263201.jpg' %}"></div>
+                <div class="slide"><img src="{% static 'images/pexels-cristian-rojas-8459996.jpg' %}"></div>
+                <div class="slide"><img src="{% static 'images/pexels-pavel-danilyuk-7108319.jpg' %}"></div>
+            </div>
+        </div>
+        <p class="about-section3-button-heading fade-in">
+            Let us help you feel confident in your skin.
+        </p>
+        <a href="{% url 'service-category-list' %}" class="about-section3-cta-button fade-in">See our Services</a>
+    </div>
+</div>
+
+{% endblock %}

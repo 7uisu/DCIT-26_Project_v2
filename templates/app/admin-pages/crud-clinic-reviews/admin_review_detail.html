@@ -1,0 +1,17 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% block title %}Review Details{% endblock %}
+
+{% block content %}
+<div class="section-admin-review-detail-page">
+    <h1 class="mt-4">Review Details</h1>
+    
+    <div class="review-details">
+        <p><strong>Patient:</strong> {{ reviews-details.patient }}</p>
+        <p><strong>Review:</strong> {{ reviews-details.review_text }}</p>
+        <p><strong>Rating:</strong> {{ reviews-details.rating }} ⭐</p>
+        <p><strong>Date:</strong> {{ reviews-details.date }}</p>
+    </div>
+    
+    <a href="{% url 'clinic-review-list' %}" class="btn btn-secondary mt-3">Back to Reviews</a>
+</div>
+{% endblock %}

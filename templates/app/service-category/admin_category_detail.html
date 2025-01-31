@@ -1,0 +1,14 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block title %}Category Details{% endblock %}
+
+{% block content %}
+<div class="section-admin-category-detail-page">
+    <h1>Category: {{ category.name }}</h1>
+    <p><strong>Description:</strong> {{ category.description }}</p>
+    
+    <a href="{% url 'admin-service-category-update' category.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'admin-service-category-delete' category.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'admin-service-category-list' %}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}

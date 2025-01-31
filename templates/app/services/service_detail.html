@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="service-detail-page">
+
+    <!-- Background Image -->
+    <div class="service-detail-page-background">
+      <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+    </div>
+  
+    <!-- Overlay -->
+    <div class="service-detail-page-overlay"></div>
+    <!-- Profile Display Container -->
+    <div class="service-detail-page-container">
+        <div class="service-detail-page-card">
+            <img src="{% if service.image %}{{ service.image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" alt="{{ service.name }}">
+            <h1>{{ service.name }}</h1>
+            <p>Category: {{ service.category.name }}</p>
+            <p>Description: {{ service.description }}</p>
+            <p>Price: ${{ service.price }}</p>
+            <!-- Appointment Button -->
+            <a href="#" class="service-detail-page-appointment-link">Book Appointment</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

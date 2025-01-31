@@ -1,0 +1,11 @@
+# custom_filters.py
+from django import template
+
+register = template.Library()
+
+@register.filter
+def to(value):
+    """Generate a range of numbers from 1 to value."""
+    return range(1, value + 1)
+
+

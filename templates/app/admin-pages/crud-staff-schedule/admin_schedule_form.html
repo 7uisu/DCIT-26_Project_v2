@@ -1,0 +1,15 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-schedule-form-page">
+<h2>{% if object %}Edit{% else %}Create{% endif %} Staff Schedule</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">
+        {% if object %}Update{% else %}Create{% endif %}
+    </button>
+</form>
+<a href="{% url 'admin-staff-schedule' %}">Cancel</a>
+</div>
+{% endblock %}

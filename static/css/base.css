@@ -11,6 +11,19 @@ body, html {
     box-sizing: border-box;
 }
 
+/* Error Messages */
+.error-messages {
+    background-color: #ffe6e6;
+    color: #d9534f;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 250px;
+    text-align: left;
+    font-size: 14px;
+}
+
+
 /* General Navbar Styling */
 .navbar {
     position: fixed;
@@ -38,18 +51,72 @@ body, html {
     gap: 48px;
     margin: 0;
     padding: 0;
+    align-items: center; /* Add this to vertically center the menu items */
 }
 
+/* Other Styling */
 .navbar-center ul li a {
     text-decoration: none;
     color: #333;
     font-size: 16px;
-    font-weight: 400; /* Regular weight */
+    font-weight: 400;
 }
 
-.navbar-center ul li a:hover{
+.navbar-center ul li a:hover {
     color: #000000;
 }
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Prevent 'Services' from being clickable */
+.dropbtn {
+    cursor: default;
+    padding: 10px;
+    font-size: 16px;
+    display: block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Style dropdown links */
+.dropdown-content li {
+    list-style: none;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+/* Show dropdown smoothly */
+.dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover effect for links */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
 
 /* Right Section Buttons */
 .navbar-right {
@@ -247,6 +314,31 @@ body, html {
     font-weight: bold;
 }
 
+/* View All Categories Link */
+.view-all-categories-link {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    color: black;
+    font-family: 'Sansation', sans-serif;
+    transition: background-color 0.3s;
+}
+
+.view-all-categories-link:hover {
+    background-color: #e6f7f4;
+}
+
+.view-all-categories-link.active {
+    background-color: #7FD8D4;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
 .service-category-section {
     display: flex;
     gap: 20px;
@@ -340,7 +432,1750 @@ body, html {
     background-color: #5ac8a5;
 }
 
-/* Footer */
+/* Section 3 Styles */
+#section3 {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevent content from spilling outside the section */
+    color: #fff; /* Text color */
+}
+
+.section3-background img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Place behind overlay */
+}
+
+.section3-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(127, 216, 212, 0.8); /* Overlay color with opacity */
+    z-index: 2; /* Above the background */
+}
+
+.testimonial-container {
+    position: relative;
+    z-index: 3; /* Above overlay */
+    text-align: center;
+    color: #fff; /* Ensure text is visible over the background */
+    padding: 0 20px;
+}
+
+/* Testimonial Carousel Styles */
+.testimonial-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%; /* Ensures the carousel takes up the full width */
+    overflow: hidden; /* Prevents the testimonials from spilling outside the container */
+}
+
+/* Testimonial Carousel Button Styles */
+.testimonial-carousel-btn {
+    background: none;
+    border: none;
+    font-size: 3rem;
+    color: #7FD8D4;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    margin-top: -180px;
+}
+
+.testimonial-prev-btn {
+    left: 10px; /* Position the previous button to the left */
+}
+
+.testimonial-next-btn {
+    right: 10px; /* Position the next button to the right */
+}
+
+.testimonial-carousel-btn:hover {
+    color: #ff667a;
+}
+
+
+/* Fixed Card Dimensions */
+.testimonial-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+    width: 1200px; /* Fixed width */
+    height: 800px; /* Fixed height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    overflow: hidden;
+}
+
+
+.testimonial-title {
+    font-size: 3rem;
+    font-family: 'Merriweather', serif;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ff667a;
+    margin-bottom: -25px; /* Decreased margin */
+}
+
+.testimonial-subtitle {
+    font-size: 2rem;
+    font-family: 'Sansation', sans-serif;
+    font-weight: 600;
+    font-style: none; /* Italicized text */
+    margin-bottom: 20px;
+    color: #000; /* Black color */
+}
+
+/* Testimonial Content Layout */
+.testimonial-content {
+    display: flex;
+    align-items: center; /* Vertically align the items */
+    gap: 15px; /* Space between photo and text */
+    margin-top: 20px; /* Space between title/subtitle and content */
+    transition: transform 0.3s ease-in-out; /* Smooth transition when moving the testimonials */
+}
+
+.testimonial-item {
+    min-width: 100%; /* Each testimonial will take up 100% of the container's width */
+    display: none; /* Hide all testimonials by default */
+}
+
+.testimonial-item.active {
+    display: block; /* Show the active testimonial */
+}
+
+/* Ensures a fixed square container */
+.testimonial-photo-container {
+    width: 350px; /* Fixed width */
+    height: 350px; /* Fixed height */
+    border-radius: 50% 0 75% 0; /* Top-left and bottom-right corners rounded */
+    overflow: hidden; /* Clips overflowing parts of the image */
+    position: relative; /* For consistent image placement */
+    flex-shrink: 0; /* Prevents resizing if inside a flex container */
+    background-color: #f0f0f0; /* Fallback color */
+}
+
+/* Styles the image within the container */
+.reviewer-photo {
+    width: 100%; /* Fill the container's width */
+    height: 100%; /* Fill the container's height */
+    object-fit: cover; /* Ensures the image covers the container */
+    object-position: center; /* Centers the image within the container */
+    display: block; /* Prevent inline spacing issues */
+}
+
+
+.testimonial-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between text, name, and rating */
+}
+
+.testimonial-text {
+    font-size: 1rem; /* Adjustable font size */
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic; /* Italicized text */
+    color: #555;
+    margin-bottom: 10px; /* Space below text */
+    line-height: 1.2; /* Tighter line spacing */
+    max-width: 500px; /* Ensure text doesn't exceed this width */
+    text-align: justify; /* Optional: Makes the text alignment cleaner */
+    word-wrap: break-word; /* Ensure long words don't break layout */
+}
+
+.reviewer-name {
+    font-size: 2rem; /* Slightly larger font */
+    font-family: 'Sansation', sans-serif;
+    font-weight: 700;
+    margin-top: 25px;
+    color: #333;
+}
+
+.reviewer-rating {
+    color: gold;
+    font-size: 4rem;
+    margin-top: -50px;
+}
+
+/* To Booking Section */
+#section4 {
+    position: relative;
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensure content is not visible outside section */
+    background-color: #FFFEF5;
+}
+
+.to-booking-section {
+    text-align: center;
+    background: linear-gradient(90deg, #7FD8D4, #BD4BFF);
+    padding: 40px;
+    border-radius: 20px;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-section-container {
+    color: white;
+    padding: 30px;
+}
+
+.booking-section-text {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-style: medium;
+    font-size: 23px;
+    color: #000;
+}
+
+.to-booking-section h2 {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 64px; /* Reduced font size for responsiveness */
+    padding: 10px;
+}
+
+
+.booking-section-button {
+    padding: 15px 80px;
+    border: none;
+    border-radius: 50px;
+    background-color: #7FD8D4; /* Teal background */
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Merriweather', serif; /* Apply font-family here */
+    font-weight: 400; /* Set to Merriweather Light */
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+    
+}
+
+.booking-section-button:hover {
+    background-color: #e6f7f4;
+}
+
+/* Home Section */
+#about-section1 {
+    position: relative;
+    height: 75vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevent content from spilling outside the section */
+}
+
+.about-section1-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Background should be below everything */
+    overflow: hidden; /* Prevent the image from overflowing its container */
+}
+
+.about-section1-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire section */
+    object-position: center; /* Centers the image within the section */
+    transform: scale(1.1); /* Slightly zoom the image for a dynamic effect */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.about-section1-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) -50%, rgba(255, 254, 245, 1) 80%); 
+    z-index: 1; /* Ensure the overlay is above the background image but below the content */
+}
+
+.about-section1-content {
+    position: relative;
+    z-index: 2; /* Ensure content appears above the overlay */
+    display: flex;
+    align-items: center; /* Vertically center items */
+    justify-content: flex-start; /* Align both elements starting from the left */
+    width: 100%;
+    max-width: 1200px; /* Restrict content width */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px; /* Add padding for spacing */
+    box-sizing: border-box;
+}
+
+.about-section1-left-image {
+    flex: 4; /* Let the image take flexible space */
+    max-width: 50%; /* Decrease the max-width of the image */
+    margin-right: 50px; /* Add right margin to separate image from text */
+    transition: margin-left 0.3s ease-in-out; /* Smooth transition when moving image */
+}
+
+.about-section1-left-image img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits nicely */
+    border-radius: 12px; /* Optional: add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a subtle shadow */
+}
+
+.about-section1-text-content {
+    flex: 2; /* Allow the text content to take up more space */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align elements to the left */
+    text-align: left; /* Align text to the left */
+    padding-left: 40px; /* Increase padding to create more space between text and image */
+    position: relative; /* To manage overflow of description */
+}
+
+.about-section1-text-wrapper {
+    width: 100%;
+}
+
+.about-section1-title {
+    font-size: 5rem;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    color: #000000; /* Adjust text color */
+    align-self: center; /* Center the title */
+    text-align: center; /* Center text within the title block */
+    width: 100%; /* Ensure the title spans full width for centering */
+    margin-bottom: 20px; /* Add extra space below title */
+}
+
+.about-section1-description {
+    font-size: 1.5rem;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #000000;
+    margin-top: 20px;
+    text-align: right;
+    width: 110%; /* Allow description to overflow beyond the container */
+    position: relative; /* Ensures it doesn't break layout */
+    transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* About Section 2 */
+#about-section2 {
+    position: relative;
+    height: 75vh; /* Full viewport height */
+    display: flex;
+    align-items: center; /* Vertically center content */
+    justify-content: center;
+    overflow: hidden; /* Prevent content from spilling outside the section */
+}
+
+.about-section2-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Background should be below everything */
+    background: linear-gradient(to right, #000000, #808080); /* Black to grey gradient */
+}
+
+.about-section2-content {
+    position: relative;
+    z-index: 2; /* Ensure content appears above the background */
+    display: flex;
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space out the text and image */
+    width: 100%;
+    max-width: 1200px; /* Restrict content width */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px; /* Add padding for spacing */
+    box-sizing: border-box;
+}
+
+.about-section2-text-content {
+    flex: 2; /* Allow the text content to take up more space */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align elements to the left */
+    text-align: left; /* Align text to the left */
+    padding-right: 40px; /* Space between text and image */
+    position: relative; /* To manage overflow */
+}
+
+.about-section2-text-wrapper {
+    width: 100%;
+}
+
+.about-section2-description {
+    font-size: 1.7rem;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #ffffff; /* White text color for better contrast on the dark background */
+    margin-top: 20px;
+    text-align: left;
+}
+
+.about-section2-right-image {
+    flex: 3; /* Let the image take up more space */
+    max-width: 50%; /* Restrict the max-width of the image */
+    margin-left: 40px; /* Add left margin to separate image from text */
+}
+
+.about-section2-right-image img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image fills its container */
+    border-radius: 12px; /* Optional: add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a subtle shadow */
+}
+
+/* About Section 3 */
+#about-section3 {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center; /* Vertically center content */
+    justify-content: center;
+    overflow: hidden; /* Ensure content is not visible outside section */
+    padding-top: 50px;
+    padding-bottom: 50px;
+    scroll-snap-align: center;
+}
+
+/* About Section */
+#about-section3 {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensure content is not visible outside section */
+    padding-top: 50px; /* Ensure there's even spacing at the top and bottom */
+    padding-bottom: 50px; /* Ensure there's even spacing at the top and bottom */
+    scroll-snap-align: center;
+}
+
+.about-section3-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Background should be below everything */
+    overflow: hidden; /* Prevent the image from overflowing its container */
+}
+
+.about-section3-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire section */
+    object-position: center; /* Centers the image within the section */
+    transform: scale(1.1); /* Slightly zoom the image for a dynamic effect */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.about-section3-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) -50%, rgba(255, 254, 245, 1) 80%); 
+    z-index: 1; /* Ensure the overlay is above the background image but below the content */
+}
+
+.about-section3-content {
+    text-align: center;
+    background-color: transparent;
+    width: 100%; /* Ensure it takes full width of the parent container */
+    z-index: 2;
+}
+
+.about-section3-description {
+    text-align: center; /* Center-align the text */
+    margin-left: auto; /* Auto margin on the left side */
+    margin-right: auto; /* Auto margin on the right side */
+    margin-top: 0; /* Ensure no extra margin at the top */
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+    font-size: 28px;
+    max-width: 1000px; /* Optional: Set a maximum width to prevent the text from becoming too wide */
+}
+
+
+.slider {
+    position: relative;
+    overflow: hidden;
+    height: 300px; /* Adjust height as needed */
+    margin: 50px 0;
+}
+
+.slide-track {
+    display: flex;
+    animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-200px * 5)); /* Adjust based on number of slides and width */
+    }
+}
+
+.slide {
+    width: 400px; /* Adjust width as needed */
+    margin: 0 10px; /* Adjust margin as needed */
+    flex-shrink: 0;
+}
+
+
+.slide img {
+    width: 400px; /* Specify the desired width */
+    height: 300px; /* Specify the desired height */
+    display: block;
+    object-fit: cover; /* Ensure the images maintain aspect ratio */
+    border-radius: 33px;
+    box-shadow: 8px 0px 20px rgba(0, 0, 0, 0.25); /* Add shadow */
+}
+
+.about-section3-button-heading {
+    font-family: 'Merriweather', serif;
+    font-weight: 600;
+    font-style: italic; /* Change this to italic to make the text italic */
+    font-optical-sizing: auto;
+    font-style: medium;
+    font-size: 23px;
+    margin-bottom: 20px;
+}
+
+.about-section3-cta-button {
+    display: inline-block;
+    padding: 15px 100px; /* Increased padding to make the button wider */
+    background-color: #7FD8D4;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 72px;
+    transition: background-color 0.3s;
+
+    font-family: 'Merriweather', serif;
+    font-weight: 300;
+
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: 21px;
+    
+}
+
+.about-section3-cta-button:hover {
+    background-color: #5AC8A5;
+}
+
+
+/* login.html */
+.section-login-page {
+    position: relative;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-page-background img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Place behind overlay */
+}
+
+.login-page-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(127, 216, 212, 0.8); /* Overlay color with opacity */
+    z-index: 2; /* Above the background */
+}
+
+.login-page-container {
+    display: flex; /* Arrange items side-by-side */
+    flex-direction: row; /* Horizontal alignment */
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed for overall width */
+    height: 600px; /* Fixed height for the container */
+    border-radius: 40px;
+    overflow: hidden; /* Prevent content from overflowing */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #ffffff; /* Light background */
+    z-index: 2; /* Above the background */
+}
+
+.login-form-wrapper {
+    flex: 1; /* Take up half of the container */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f4f4f4; /* Form background color */
+}
+
+.login-page-right-image {
+    flex: 1; /* Take up the other half of the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff; /* Add a fallback color */
+    overflow: hidden; /* Ensure the image stays contained */
+}
+
+.login-page-right-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the area */
+}
+
+.login-username-text, .login-password-text {
+    font-family: 'Sansation', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Input Fields Styling */
+.login-input-field {
+    width: 500px; /* Ensure they take up the full width of their container */
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* When username or password input is focused */
+.login-input-field:focus {
+    border-color: #7FD8D4; /* Teal accent color */
+    box-shadow: 0 0 6px rgba(127, 216, 212, 0.5);
+    outline: none; /* Remove default outline */
+    background-color: #ffffff; /* Slightly brighter */
+}
+
+/* Forgot password link styling */
+.forgot-password {
+    display: block; /* Make it take the full width */
+    margin-bottom: 10px; /* Space between the link and button */
+    color: #7FD8D4;
+    font-size: 14px;
+    font-family: 'Sansation', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: left;
+}
+
+/* Forgot password link styling */
+.forgot-password:hover {
+    color: #5ac8a5;
+}
+
+
+/* Adjust button width */
+.login-button {
+    width: 100%; /* Full width button */
+    padding: 12px;
+    font-size: 18px;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+    color: #ffffff;
+    background-color: #7FD8D4;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+/* Button Hover Effect */
+.login-button:hover {
+    background-color: #5ac8a5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* General Font Styling */
+.login-title {
+    font-family: 'Merriweather', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    font-family: 'Sansation', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.social-login-buttons .social-button {
+    width: 100px; /* Evenly spaced buttons */
+    padding: 10px 0;
+    font-size: 16px;
+    font-family: 'Sansation', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.continue-with {
+    font-family: 'Sansation', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.social-login-buttons .google-btn {
+    background-color: #DB4437; /* Google red */
+}
+
+.social-login-buttons .facebook-btn {
+    background-color: #4267B2; /* Facebook blue */
+}
+
+.social-login-buttons .social-button:hover {
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+.signup-text {
+    font-family: 'Sansation', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* sign-up.html */
+.section-signup-page {
+    position: relative;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.signup-page-background img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.signup-page-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(127, 216, 212, 0.8);
+    z-index: 2;
+}
+
+.signup-page-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    height: 900px;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    z-index: 2;
+}
+
+.signup-form-wrapper {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f4f4f4;
+}
+
+.signup-page-right-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.signup-page-right-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.signup-title {
+    font-family: 'Merriweather', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.signup-subtitle {
+    font-family: 'Sansation', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.error-messages {
+    background-color: #ffe6e6;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.non-field-errors {
+    font-style: italic;
+}
+
+
+.signup-username-text, .signup-email-text, .signup-password-text, .signup-confirm-password-text {
+    font-family: 'Sansation', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.signup-input-field {
+    width: 500px;
+    padding: 5px 9px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.signup-input-field:focus {
+    border-color: #7FD8D4;
+    box-shadow: 0 0 6px rgba(127, 216, 212, 0.5);
+    outline: none;
+    background-color: #ffffff;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+    color: #ffffff;
+    background-color: #7FD8D4;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.signup-button:hover {
+    background-color: #5ac8a5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.social-signup-buttons .social-button {
+    width: 100px;
+    padding: 10px 0;
+    font-size: 16px;
+    font-family: 'Sansation', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social-signup-buttons .google-btn {
+    background-color: #DB4437;
+}
+
+.social-signup-buttons .facebook-btn {
+    background-color: #4267B2;
+}
+
+.social-signup-buttons .social-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.login-text {
+    font-family: 'Sansation', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* Profile Section */
+.section-profile-fillup-page {
+    position: relative;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px; /* Padding for responsiveness */
+    background: #e8f5f4; /* Light background color */
+}
+
+.profile-fillup-page-background img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: blur(8px) brightness(0.7); /* Add blur and dim effect */
+}
+
+.profile-fillup-page-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(127, 216, 212, 0.8); /* Semi-transparent teal overlay */
+    z-index: 2;
+}
+
+.profile-fillup-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    width: 100%;
+    max-width: 900px; /* Limit width for better responsiveness */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background: #ffffff; /* White card background */
+    z-index: 3;
+    padding: 20px;
+}
+
+.profile-fillup-form-wrapper {
+    width: 100%; /* Ensure it takes up the full width of its parent */
+    max-width: 800px; /* Optionally limit the max-width for better design */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f9f9f9;
+    border-radius: 20px;
+}
+
+
+.profile-fillup-title {
+    font-family: 'Merriweather', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.profile-fillup-subtitle {
+    font-family: 'Sansation', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Profile Picture Upload */
+.profile-fillup-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-fillup-picture-container img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #7fd8d4; /* Matching teal color */
+    margin-bottom: 10px;
+}
+
+.upload-btn {
+    background-color: #7fd8d4;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+}
+
+.upload-btn:hover {
+    background-color: #65c6c2;
+}
+
+/* Form Elements */
+.profile-fillup-form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.profile-fillup-label {
+    display: block;
+    color: #4A4A4A; /* Lighter grey color */
+    text-transform: capitalize; /* Capitalizes the first letter of each word */
+
+    font-family: 'Sansation', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.profile-fillup-input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.profile-fillup-input-field:focus {
+    border-color: #7fd8d4;
+    outline: none;
+}
+
+/* Save Button */
+.save-profile-fillup-btn {
+    background-color: #7fd8d4;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 200px;
+    align-self: center;
+}
+
+.save-profile-fillup-btn:hover {
+    background-color: #65c6c2;
+}
+
+/* Profile Section */
+.section-profile-page {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.profile-page-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.profile-page-background .background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+}
+
+.profile-page-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.profile-page-container {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Merriweather', serif; /* Apply Merriweather font */
+}
+
+.profile-wrapper {
+    text-align: left;
+}
+
+.profile-title {
+    font-family: 'Sansation', sans-serif; /* Apply Sansation font */
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.profile-picture-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #ddd;
+    object-fit: cover;
+}
+
+.profile-details p {
+    font-family: 'Sansation', sans-serif; /* Apply Sansation font */
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+}
+
+.profile-details p strong {
+    font-family: 'Sansation', sans-serif; /* Apply Sansation font */
+    color: #333;
+}
+
+.edit-profile-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-family: 'Merriweather', serif; /* Apply Merriweather font */
+    font-weight: 700;
+}
+
+.edit-profile-btn:hover {
+    background-color: #0056b3;
+}
+
+/* category_list.html */
+.category-list-page {
+    position: relative;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px; /* Padding for responsiveness */
+    background: #e8f5f4; /* Light background color */
+}
+
+.category-list-page-background img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: blur(8px) brightness(0.7); /* Add blur and dim effect */
+}
+
+.category-list-page-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(127, 216, 212, 0.8); /* Semi-transparent teal overlay */
+    z-index: 2;
+}
+
+.category-list-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    width: 100%;
+    max-width: 900px; /* Limit width for better responsiveness */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background: #ffffff; /* White card background */
+    z-index: 3;
+    padding: 20px;
+}
+
+/* Heading */
+.category-list-page-container h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Category List */
+.category-list-page-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Category Card */
+.category-list-page-card {
+    background: #ffffff;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.category-list-page-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Category Title */
+.category-list-page-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    font-family: 'Merriweather', serif;
+}
+
+/* Category Description */
+.category-list-page-card p {
+    font-size: 14px;
+    color: #666;
+    padding: 0 15px 10px;
+    font-family: 'Sansation', sans-serif;
+}
+
+/* No Category Message */
+.no-category {
+    font-size: 18px;
+    color: #777;
+}
+
+/* category_detail.html */
+.category-detail-page {
+    position: relative;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px; /* Padding for responsiveness */
+    background: #e8f5f4; /* Light background color */
+}
+
+.category-detail-page-background img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: blur(8px) brightness(0.7); /* Add blur and dim effect */
+}
+
+.category-detail-page-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(127, 216, 212, 0.8); /* Semi-transparent teal overlay */
+    z-index: 2;
+}
+
+.category-detail-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    width: 100%;
+    max-width: 900px; /* Limit width for better responsiveness */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background: #ffffff; /* White card background */
+    z-index: 3;
+    padding: 20px;
+}
+
+/* Heading */
+.category-detail-page-container h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+}
+
+
+.category-detail-page-container h3 {
+    font-size: 22px;
+    margin-top: 20px;
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+}
+
+/* Description */
+.category-detail-page-container p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Service List */
+.category-detail-page-service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* Service Card */
+.category-detail-page-service-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+    width: 220px;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.category-detail-page-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Service Image */
+.category-detail-page-service-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Service Title */
+.category-detail-page-service-card h4 {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    font-family: 'Merriweather', serif;
+}
+
+/* Service Price */
+.category-detail-page-service-card p {
+    font-size: 14px;
+    color: #666;
+    padding: 0 15px 10px;
+    font-family: 'Sansation', sans-serif;
+}
+
+
+/* Clickable Service */
+.category-detail-page-service-card a {
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    color: #666;
+    padding: 0 15px 10px;
+    font-family: 'Sansation', sans-serif;
+}
+
+/* Back Button */
+.category-detail-page-container .category-detail-page-back-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #7FD8D4;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+}
+
+.category-detail-page-container .category-detail-page-back-btn:hover {
+    background-color: #5ac8a5;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .category-detail-page-container {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .category-detail-page-service-card {
+        width: 180px;
+    }
+}
+
+/* service_list.html */
+.service-list-page {
+    position: relative;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px; /* Padding for responsiveness */
+    background: #e8f5f4; /* Light background color */
+}
+
+/* Background Image */
+.service-list-page-background img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: blur(8px) brightness(0.7); /* Add blur and dim effect */
+}
+
+/* Overlay */
+.service-list-page-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(127, 216, 212, 0.8); /* Semi-transparent teal overlay */
+    z-index: 2;
+}
+
+/* Main Container */
+.service-list-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    width: 100%;
+    max-width: 1200px; /* Limit width for better responsiveness */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background: #ffffff; /* White card background */
+    z-index: 3;
+    padding: 20px;
+}
+
+/* Heading */
+.service-list-page-container h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+/* Service Category Tabs */
+.service-list-page-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.service-list-page-tab-btn {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Sansation', sans-serif;
+}
+
+.service-list-page-tab-btn:hover {
+    background-color: #e6f7f4;
+}
+
+.service-list-page-tab-btn.active {
+    background-color: #7FD8D4;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Services List */
+.service-list-page-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Service Category Sections */
+.service-list-page-category-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Service Cards */
+.service-list-page-card {
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-list-page-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.service-list-page-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.service-list-page-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    font-family: 'Merriweather', serif;
+}
+
+.service-list-page-card p {
+    font-size: 14px;
+    color: #666;
+    padding: 0 15px 10px;
+    font-family: 'Sansation', sans-serif;
+}
+
+.service-list-page-learn-more-link {
+    display: block;
+    font-size: 14px;
+    color: #7FD8D4;
+    text-decoration: none;
+    padding: 0 15px 15px;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+}
+
+.service-list-page-learn-more-link:hover {
+    text-decoration: underline;
+}
+
+
+/* service_detail.html */
+.service-detail-page {
+    position: relative;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px; /* Padding for responsiveness */
+    background: #e8f5f4; /* Light background color */
+}
+
+.service-detail-page-background img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: blur(8px) brightness(0.7); /* Add blur and dim effect */
+}
+
+.service-detail-page-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(127, 216, 212, 0.8); /* Semi-transparent teal overlay */
+    z-index: 2;
+}
+
+.service-detail-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    width: 100%;
+    max-width: 700px; /* Limit width for better responsiveness */
+    height: 800px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background: #ffffff; /* White card background */
+    z-index: 3;
+    padding: 20px;
+}
+
+/* Service Cards */
+.service-detail-page-card {
+    width: 600px;
+    height: 700px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-detail-page-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.service-detail-page-card img {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    display: block;
+}
+
+.service-detail-page-card h1 {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    font-family: 'Merriweather', serif;
+}
+
+.service-detail-page-card p {
+    font-size: 14px;
+    color: #666;
+    padding: 0 15px 10px;
+    font-family: 'Sansation', sans-serif;
+}
+
+.service-detail-page-appointment-link {
+    display: block;
+    font-size: 14px;
+    color: #144fce;
+    text-decoration: none;
+    padding: 0 15px 15px;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+}
+
+.service-detail-page-appointment-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer Section */
 .footer {
     background-color: #454545;
     color: #fff;
@@ -479,4 +2314,1034 @@ body, html {
 
     .footer-links {
     }
+}
+
+
+.sidebar {
+    width: 70px; /* Default collapsed width */
+    height: 100%;
+    background-color: #2c3e50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.sidebar-logo {
+    text-align: center;
+    /* margin-bottom: 5px; */
+    transition: width 0.3s ease;
+}
+
+.sidebar-logo img {
+    width: 40px; /* Small logo */
+    transition: width 0.3s ease;
+}
+
+.sidebar-nav {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-nav .sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the image when collapsed */
+    padding: 10px;
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 16px;
+    border-bottom: 1px solid #34495e;
+    transition: background-color 0.3s ease, width 0.3s ease;
+    white-space: nowrap;
+}
+
+.sidebar-nav .sidebar-item img {
+    width: 25px;
+    height: 25px;
+    transition: width 0.3s ease, height 0.3s ease, margin-right 0.3s ease;
+}
+
+/* Initially hide text */
+.sidebar-nav .sidebar-item span {
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Hover effect: Expand sidebar, show text, and align icons */
+.sidebar:hover {
+    width: 250px;
+}
+
+.sidebar:hover .sidebar-item {
+    justify-content: flex-start; /* Aligns items to the left */
+}
+
+.sidebar:hover .sidebar-item img {
+    margin-right: 10px; /* Adds space between icon and text */
+}
+
+.sidebar:hover .sidebar-item span {
+    display: inline;
+    opacity: 1;
+}
+
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+/* Admin Panel Layout */
+.section-admin-dashboard-page {
+    margin-left: 70px; /* Adjust based on sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Dashboard Header */
+.admin-dashboard-header {
+    background-color: #7FD8D4;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Patient List Container */
+.admin-patient-list-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styles */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Table Header */
+.table thead {
+    background: #343a40;
+    color: white;
+    font-size: 1rem;
+}
+
+.table th {
+    padding: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Table Body */
+.table td {
+    padding: 10px;
+    font-size: 0.95rem;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternating Row Background */
+.table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Profile Image */
+.admin-profile-img {
+    object-fit: cover;
+    border: 2px solid #ccc;
+    width: 40px;
+    height: 40px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border: none;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn:hover {
+    filter: brightness(90%);
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .btn {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+}
+
+
+.section-admin-patient-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Patient Details Page Layout */
+.section-admin-patient-detail-page {
+    margin-left: 70px; /* Adjust based on sidebar width */
+    transition: margin-left 0.3s ease;
+    padding: 20px;
+}
+
+/* Title Styling */
+.section-admin-patient-detail-page h1 {
+    background-color: #7FD8D4;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Patient Details Container */
+.patient-details {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Patient Detail Text */
+.patient-details p {
+    font-size: 1rem;
+    color: #333;
+    margin: 10px 0;
+}
+
+/* Highlighting Labels */
+.patient-details p strong {
+    color: #555;
+    font-weight: 600;
+}
+
+/* Profile Picture Styling */
+.patient-profile-picture {
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    margin: 20px auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-admin-patient-detail-page {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .patient-details {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+
+.section-admin-patient-confirm-delete-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+
+/* Card Box */
+.admin-confirm-delete-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Header Title */
+.admin-confirm-delete-card h1 {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Patient Details */
+.admin-delete-details {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.admin-delete-details p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+/* Delete Button */
+.admin-btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    display: block;
+}
+
+.admin-btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Cancel Button */
+.admin-btn-secondary {
+    display: block;
+    margin-top: 10px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    background-color: #6c757d;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.admin-btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-confirm-delete-card {
+        width: 90%;
+    }
+}
+
+.section-admin-patient-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Page Title */
+.admin-form-title {
+    background-color: #7FD8D4;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Form Container */
+.admin-form-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Input Fields */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border: 1px solid #7FD8D4;
+    outline: none;
+    box-shadow: 0 0 5px rgba(127, 216, 212, 0.5);
+}
+
+/* File Input */
+.form-control-file {
+    border: none;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-admin-patient-form-page {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .admin-form-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+.section-admin-staff-management-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-staff-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-staff-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Appointment Page */
+.section-admin-appointment-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Appointment Detail Page */
+.section-admin-appointment-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Appointment Form Page */
+.section-admin-appointment-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Appointment Confirm Delete Page */
+.section-admin-appointment-confirm-delete-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Consultation Page */
+.section-admin-consultation-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Consultation Detail Page */
+.section-admin-consultation-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Consultation Form Page */
+.section-admin-consultation-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Consultation Confirm Delete Page */
+.section-admin-consultation-confirm-delete-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Schedule Page */
+.section-admin-schedule-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Schedule Detail Page */
+.section-admin-schedule-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Schedule Form Page */
+.section-admin-schedule-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Schedule Confirm Delete Page */
+.section-admin-schedule-confirm-delete-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Category List Page */
+.section-admin-category-list-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Category Detail Page */
+.section-admin-category-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Category Form Page */
+.section-admin-category-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Category Confirm Delete Page */
+.section-admin-category-confirm-delete-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Admin Service List Page */
+.section-admin-service-list-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Admin Service Detail Page */
+.section-admin-service-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Admin Service Form Page */
+.section-admin-service-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Admin Service Confirm Delete Page */
+.section-admin-service-confirm-delete-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-patient-record-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-patient-record-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-patient-record-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-patient-record-delete-confirmation {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-medical-condition-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-medical-condition-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-medical-condition-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-medical-condition-delete-confirmation-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-medical-history-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-medical-history-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-medical-history-form-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-medical-history-delete-confirmation-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-patient-confirm-delete-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-review-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-admin-review-confirm-delete-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-review-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.section-review-detail-page {
+    margin-left: 70px; /* Adjust this based on the collapsed sidebar width */
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands/collapses */
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+
+/* password_reset.css */
+.section-password-reset {
+    position: relative;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.password-reset-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.password-reset-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.password-reset-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.password-reset-container form button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+}
+
+.password-reset-container form button:hover {
+    background: #0056b3;
+}
+
+.password-reset-container p {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.password-reset-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.password-reset-container a:hover {
+    text-decoration: underline;
+}
+
+/* password_reset_confirm.css */
+.section-password-reset-confirm {
+    position: relative;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.password-reset-confirm-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.password-reset-confirm-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.password-reset-confirm-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.password-reset-confirm-container form button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+}
+
+.password-reset-confirm-container form button:hover {
+    background: #0056b3;
+}
+
+.password-reset-confirm-container p {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.password-reset-confirm-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.password-reset-confirm-container a:hover {
+    text-decoration: underline;
+}
+
+/* password_reset_done.css */
+.section-password-reset-done {
+    position: relative;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.password-reset-done-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.password-reset-done-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.password-reset-done-container p {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.password-reset-done-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.password-reset-done-container a:hover {
+    text-decoration: underline;
+}
+
+/* password_reset_complete.css */
+.section-password-reset-complete {
+    position: relative;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.password-reset-complete-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.password-reset-complete-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.password-reset-complete-container p {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.password-reset-complete-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.password-reset-complete-container a:hover {
+    text-decoration: underline;
+}
+
+/* password_reset_invalid.css */
+.section-password-reset-invalid {
+    position: relative;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.password-reset-invalid-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.password-reset-invalid-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.password-reset-invalid-container p {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.password-reset-invalid-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.password-reset-invalid-container a:hover {
+    text-decoration: underline;
 }

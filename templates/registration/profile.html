@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="section-profile-page">
+
+    <!-- Background Image -->
+    <div class="profile-page-background">
+        <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="profile-page-overlay"></div>
+
+    <!-- Profile Display Container -->
+    <div class="profile-page-container">
+
+        <!-- Profile Display -->
+        <div class="profile-wrapper">
+
+            <h2 class="profile-title">Your Profile</h2>
+
+            <!-- Profile Picture -->
+            <div class="profile-picture-container">
+                {% if patient.profile_picture %}
+                <img src="{{ patient.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+                {% else %}
+                <img src="{% static 'images/default-avatar.jpg' %}" alt="Profile Picture" class="profile-picture">
+                {% endif %}
+            </div>
+
+            <!-- Profile Details -->
+            <div class="profile-details">
+                <p><strong>Username:</strong> {{ patient.user.username }}</p>
+                <p><strong>First Name:</strong> {{ patient.user.first_name }}</p>
+                <p><strong>Last Name:</strong> {{ patient.user.last_name }}</p>
+                <p><strong>Email:</strong> {{ patient.user.email }}</p>
+                <p><strong>Date of Birth:</strong> {{ patient.date_of_birth|date:"F d, Y" }}</p>
+                <p><strong>Country:</strong> {{ patient.country }}</p>
+                <p><strong>Region:</strong> {{ patient.region }}</p>
+                <p><strong>Province:</strong> {{ patient.province }}</p>
+                <p><strong>City/Municipality:</strong> {{ patient.city_municipality }}</p>
+                <p><strong>Barangay:</strong> {{ patient.barangay }}</p>
+                <p><strong>Postal Code:</strong> {{ patient.postal_code }}</p>
+                <p><strong>House Number & Street:</strong> {{ patient.house_number_street }}</p>
+                <p><strong>Subdivision:</strong> {{ patient.subdivision }}</p>
+                <p><strong>Contact Number:</strong> {{ patient.contact_number }}</p>
+            </div>
+
+            <!-- Edit Profile Button -->
+            <a href="{% url 'profile-fillup' %}" class="edit-profile-btn">Edit Profile</a>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-schedule-detail-page">
+<h2>Staff Schedule Details</h2>
+<p><strong>Staff:</strong> {{ object.staff }}</p>
+<p><strong>Day of the Week:</strong> {{ object.day_of_week }}</p>
+<p><strong>Start Time:</strong> {{ object.start_time }}</p>
+<p><strong>End Time:</strong> {{ object.end_time }}</p>
+<a href="{% url 'admin-staff-schedule-update' object.pk %}">Edit</a> |
+<a href="{% url 'admin-staff-schedule-delete' object.pk %}">Delete</a> |
+<a href="{% url 'admin-staff-schedule' %}">Back to Schedule List</a>
+</div>
+{% endblock %}

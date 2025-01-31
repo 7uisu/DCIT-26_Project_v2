@@ -1,0 +1,36 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block title %}Service Categories{% endblock %}
+
+{% block content %}
+<div class="section-admin-category-list-page">
+    <h1>Service Categories</h1>
+    <a href="{% url 'admin-service-category-create' %}" class="btn btn-primary mb-3">Add New Category</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td>{{ category.description }}</td>
+                <td>
+                    <a href="{% url 'admin-service-category-detail' category.pk %}" class="btn btn-info btn-sm">View</a>
+                    <a href="{% url 'admin-service-category-update' category.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'admin-service-category-delete' category.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No service categories available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

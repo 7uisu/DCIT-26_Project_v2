@@ -1,0 +1,13 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-appointment-form-page">
+<h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Appointment</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'admin-appointments' %}">Back to Appointments</a>
+</div>
+{% endblock %}

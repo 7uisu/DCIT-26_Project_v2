@@ -1,0 +1,41 @@
+{% load static %}
+<footer class="footer">
+    <div class="footer-content">
+        <!-- Logo Section -->
+        <div class="footer-logo">
+            <a href="{% url 'home' %}" class="footer-logo">
+                <img src="{% static 'images/Skin_Clinic_Logo.png' %}" alt="Cavite Skin Solutions Logo">
+                <div class="footer-cavite-text">Cavite</div>
+                <div class="footer-skin-sol-text">
+                    <div>SKIN SOLUTIONS</div>
+                </div>
+            </a>
+        </div>
+        
+
+        <!-- Navigation Links -->
+        <div class="footer-links">
+            <div>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'services' %}">Services</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+            <div>
+                <a href="{% url 'faqs' %}">FAQs</a>
+                <a href="{% url 'support' %}">Support</a>
+                <a href="{% url 'feedback' %}">Feedback</a>
+                <a href="https://facebook.com/7uisu" target="_blank">
+                    <img src="{% static 'images/Logos/facebook.png' %}" alt="Facebook Icon" class="social-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="footer-bottom">
+        <hr>
+        <p>&copy; Copyright 2024 Cavite Skin Solutions<br>All rights reserved.</p>
+    </div>
+</footer>
+

@@ -1,0 +1,28 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-appointment-page">
+<h2>Appointments List</h2>
+<a href="{% url 'admin-appointment-create' %}">Create New Appointment</a>
+<table>
+    <tr>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date & Time</th>
+        <th>Actions</th>
+    </tr>
+    {% for appointment in appointment_list %}
+    <tr>
+        <td>{{ appointment.patient }}</td>
+        <td>{{ appointment.doctor }}</td>
+        <td>{{ appointment.start_time }}</td>
+        <td>
+            <a href="{% url 'admin-appointment-detail' appointment.pk %}">View</a> |
+            <a href="{% url 'admin-appointment-update' appointment.pk %}">Edit</a> |
+            <a href="{% url 'admin-appointment-delete' appointment.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

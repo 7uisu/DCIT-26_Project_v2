@@ -1,0 +1,11 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-medical-condition-detail-page">
+    <h1>Medical Condition: {{ medical_condition.name }}</h1>
+    <p><strong>Description:</strong> {{ medical_condition.description }}</p>
+    <a href="{% url 'admin-medical-condition-update' medical_condition.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'admin-medical-condition-delete' medical_condition.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'admin-medical-conditions' %}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}

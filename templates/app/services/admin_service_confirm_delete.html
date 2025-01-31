@@ -1,0 +1,16 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block title %}Delete Service{% endblock %}
+
+{% block content %}
+<div class="section-admin-service-confirm-delete-page">
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the service: <strong>{{ service.name }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'admin-service-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-category-confirm-delete-page">
+  <h2>Are you sure you want to delete the category "{{ object.name }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+  </form>
+  <a href="{% url 'service-category-list' %}">Cancel</a>
+</div>
+{% endblock %}

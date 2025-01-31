@@ -1,0 +1,15 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block title %}Service Form{% endblock %}
+
+{% block content %}
+<div class="section-admin-service-form-page">
+    <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Service</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'admin-services' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

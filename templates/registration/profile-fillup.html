@@ -1,0 +1,168 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section-profile-fillup-page">
+
+    <!-- Background Image -->
+    <div class="profile-fillup-page-background">
+        <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="profile-fillup-page-overlay"></div>
+
+    <!-- Profile Form Container -->
+    <div class="profile-fillup-page-container">
+
+        <!-- Sign Up Form -->
+        <div class="profile-fillup-form-wrapper">
+
+            <h2 class="profile-fillup-title">Your Profile</h2>
+            <p class="profile-fillup-subtitle">Complete your profile details below.</p>
+
+            <!-- Display Form Errors -->
+            {% if form.errors %}
+            <div class="error-messages">
+                {% for field, errors in form.errors.items %}
+                <p><strong>{{ field|capfirst }}</strong>: {{ errors|join:", " }}</p>
+                {% endfor %}
+                {% if form.non_field_errors %}
+                <p class="non-field-errors">{{ form.non_field_errors|join:", " }}</p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Profile Form -->
+            <form method="post" enctype="multipart/form-data" class="profile-form">
+                {% csrf_token %}
+                
+                <!-- Profile Picture Upload -->
+                <div class="profile-fillup-picture-container">
+                    {% if patient.profile_picture %}
+                    <img src="{{ patient.profile_picture.url }}" alt="Profile Picture" id="profile-preview">
+                    {% else %}
+                    <img src="{% static 'images/default-avatar.jpg' %}" alt="Profile Picture" id="profile-preview">
+                    {% endif %}
+                    <button type="button" class="upload-btn" onclick="document.getElementById('id_profile_picture').click();">
+                        Upload New Picture
+                    </button>
+                    <input type="file" name="profile_picture" id="id_profile_picture" style="display: none;" onchange="previewImage(event)">
+                </div>
+
+                <!-- Patient Profile Fields -->
+                <div class="profile-fillup-form-group">
+                    <label for="id_first_name" class="profile-fillup-label">First Name</label>
+                    <input type="text" name="first_name" value="{{ form.first_name.value }}" class="profile-fillup-input-field" id="id_first_name" placeholder="Enter your first name">
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_last_name" class="profile-fillup-label">Last Name</label>
+                    <input type="text" name="last_name" value="{{ form.last_name.value }}" class="profile-fillup-input-field" id="id_last_name" placeholder="Enter your last name">
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_email" class="profile-fillup-label">Email</label>
+                    <input type="email" name="email" value="{{ form.email.value }}" class="profile-fillup-input-field" id="id_email" placeholder="Enter your email address">
+                </div>
+                
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_date_of_birth" class="profile-fillup-label">Date of Birth</label>
+                    <input type="date" name="date_of_birth" value="{{ form.date_of_birth.value|date:"Y-m-d" }}" class="profile-fillup-input-field" id="id_date_of_birth" placeholder="Select your date of birth">
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_country" class="profile-fillup-label">Country Country</label>
+                    <select name="country" class="profile-fillup-input-field" id="id_country">
+                        <option value="">Select Country</option>
+                        {% for country in form.country.field.queryset %}
+                        <option value="{{ country.id }}" {% if country.id == form.country.value %}selected{% endif %}>
+                            {{ country.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_region" class="profile-fillup-label">Region</label>
+                    <select name="region" class="profile-fillup-input-field" id="id_region">
+                        <option value="">Select Region</option>
+                        {% for region in form.region.field.queryset %}
+                        <option value="{{ region.id }}" {% if region.id == form.region.value %}selected{% endif %}>
+                            {{ region.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_province" class="profile-fillup-label">Province</label>
+                    <select name="province" class="profile-fillup-input-field" id="id_province">
+                        <option value="">Select Province</option>
+                        {% for province in form.province.field.queryset %}
+                        <option value="{{ province.id }}" {% if province.id == form.province.value %}selected{% endif %}>
+                            {{ province.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_city_municipality" class="profile-fillup-label">City/Municipality</label>
+                    <select name="city_municipality" class="profile-fillup-input-field" id="id_city_municipality">
+                        <option value="">Select City/Municipality</option>
+                        {% for city in form.city_municipality.field.queryset %}
+                        <option value="{{ city.id }}" {% if city.id == form.city_municipality.value %}selected{% endif %}>
+                            {{ city.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_barangay" class="profile-fillup-label">Barangay</label>
+                    <select name="barangay" class="profile-fillup-input-field" id="id_barangay">
+                        <option value="">Select Barangay</option>
+                        {% for barangay in form.barangay.field.queryset %}
+                        <option value="{{ barangay.id }}" {% if barangay.id == form.barangay.value %}selected{% endif %}>
+                            {{ barangay.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_postal_code" class="profile-fillup-label">Postal Code</label>
+                    <select name="postal_code" class="profile-fillup-input-field" id="id_postal_code">
+                        <option value="">Select Postal Code</option>
+                        {% for postal in form.postal_code.field.queryset %}
+                        <option value="{{ postal.id }}" {% if postal.id == form.postal_code.value %}selected{% endif %}>
+                            {{ postal.code }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_house_number_street" class="profile-fillup-label">House Number & Street</label>
+                    <input type="text" name="house_number_street" value="{{ form.house_number_street.value }}" class="profile-fillup-input-field" id="id_house_number_street" placeholder="Enter house number and street">
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_subdivision" class="profile-fillup-label">Subdivision</label>
+                    <input type="text" name="subdivision" value="{{ form.subdivision.value }}" class="profile-fillup-input-field" id="id_subdivision" placeholder="Enter subdivision name (if any)">
+                </div>
+
+                <div class="profile-fillup-form-group">
+                    <label for="id_contact_number" class="profile-fillup-label">Contact Number</label>
+                    <input type="text" name="contact_number" value="{{ form.contact_number.value }}" class="profile-fillup-input-field" id="id_contact_number" placeholder="Enter your contact number">
+                </div>
+
+                <button type="submit" class="save-profile-fillup-btn">Save Profile</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

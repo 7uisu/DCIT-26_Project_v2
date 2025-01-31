@@ -1,0 +1,16 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-consultation-form-page">
+<h2>{% if consultation %}Edit Consultation{% else %}Create Consultation{% endif %}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <button type="submit">Save</button>
+</form>
+
+<a href="{% url 'admin-consultations' %}">Cancel</a>
+</div>
+{% endblock %}

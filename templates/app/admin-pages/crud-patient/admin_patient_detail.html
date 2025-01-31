@@ -1,0 +1,23 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block title %}Patient Details{% endblock %}
+
+{% block content %}
+<div class="section-admin-patient-detail-page">
+<h1>Patient Details</h1>
+
+<div class="patient-details">
+    <p><strong>Name:</strong> {{ patient.user.first_name }} {{ patient.user.last_name }}</p>
+    <p><strong>Date of Birth:</strong> {{ patient.date_of_birth }}</p>
+    <p><strong>Contact Number:</strong> {{ patient.contact_number }}</p>
+    <p><strong>Location:</strong> {{ patient.city_municipality.city_name }}, {{ patient.province.province_name }}</p>
+    <p><strong>Address:</strong> {{ patient.house_number_street }} {{ patient.subdivision }}</p>
+
+    {% if patient.profile_picture %}
+    <img src="{{ patient.profile_picture.url }}" alt="Profile Picture" class="patient-profile-picture">
+    {% endif %}
+
+    <a href="{% url 'admin-dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-medical-history-form-page">
+    <h1>Create / Update Medical History</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save History</button>
+    </form>
+    <a href="{% url 'admin-medical-histories' %}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}

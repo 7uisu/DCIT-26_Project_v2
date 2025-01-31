@@ -1,0 +1,32 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-medical-condition-page">
+    <div class="section-medical-condition-list-page">
+        <h1>Medical Conditions</h1>
+        <a href="{% url 'admin-medical-condition-create' %}" class="btn btn-primary">Add New Condition</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Condition Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for condition in medical_condition_list %}
+                    <tr>
+                        <td>{{ condition.name }}</td>
+                        <td>{{ condition.description|default:"No description provided" }}</td>
+                        <td>
+                            <a href="{% url 'admin-medical-condition-detail' condition.pk %}" class="btn btn-info">View</a>
+                            <a href="{% url 'admin-medical-condition-update' condition.pk %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'admin-medical-condition-delete' condition.pk %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

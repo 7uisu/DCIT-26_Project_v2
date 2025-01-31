@@ -1,0 +1,96 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section-signup-page">
+    <!-- Background Image -->
+    <div class="signup-page-background">
+        <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="signup-page-overlay"></div>
+    
+    <!-- Sign Up Form Container -->
+    <div class="signup-page-container">
+        <!-- Sign Up Form -->
+        <div class="signup-form-wrapper">
+            <h2 class="signup-title">Sign Up</h2>
+            <p class="signup-subtitle">Create an account to get started.</p>
+            
+            <!-- Error Messages -->
+            {% if form.errors %}
+            <div class="error-messages">
+                {% for field, errors in form.errors.items %}
+                <p><strong>{{ field|capfirst }}</strong>: {{ errors|join:", " }}</p>
+                {% endfor %}
+                {% if form.non_field_errors %}
+                <p class="non-field-errors">{{ form.non_field_errors|join:", " }}</p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Form -->
+            <form method="post" class="signup-form">
+                {% csrf_token %}
+                
+                <!-- Username Input -->
+                <div class="form-group">
+                    <p class="signup-username-text">Username</p>
+                    <input type="text" name="username" class="signup-input-field" placeholder="Enter Username"required>
+                </div>
+
+                <!-- First Name Input -->
+                <div class="form-group">
+                    <p class="signup-username-text">First Name</p>
+                    <input type="text" name="first_name" class="signup-input-field" placeholder="Enter First Name"required>
+                </div>
+
+                <!-- Last Name Input -->
+                <div class="form-group">
+                    <p class="signup-username-text">Last Name</p>
+                    <input type="text" name="last_name" class="signup-input-field" placeholder="Enter Last Name" required>
+                </div>
+
+                <!-- Email Input -->
+                <div class="form-group">
+                    <p class="signup-email-text">Email</p>
+                    <input type="email" name="email" class="signup-input-field" placeholder="Enter Email Address" required>
+                </div>
+            
+                <!-- Password Input -->
+                <div class="form-group">
+                    <p class="signup-password-text">Password</p>
+                    <input type="password" name="password1" class="signup-input-field" placeholder="Enter Password" required>
+                </div>
+
+                <!-- Confirm Password Input -->
+                <div class="form-group">
+                    <p class="signup-confirm-password-text">Confirm Password</p>
+                    <input type="password" name="password2" class="signup-input-field" placeholder="Confirm Password" required>
+                </div>
+            
+                <!-- Sign Up Button -->
+                <div class="form-group">
+                    <button type="submit" class="signup-button">Sign Up</button>
+                </div>
+            </form>
+            
+            <!-- Social Sign Up -->
+            <p class="continue-with">Or Sign Up With</p>
+            <div class="social-signup-buttons">
+                <button class="social-button google-btn">Google</button>
+                <button class="social-button facebook-btn">Facebook</button>
+            </div>
+            <p class="login-text">Already have an account? <a href="{% url 'login' %}" class="login-link">Log In</a></p>
+        </div>
+    
+        <!-- Right Image -->
+        <div class="signup-page-right-image">
+            <img src="{% static 'images/pexels-shkrabaanthony-5214995.jpg' %}" alt="Design Image">
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

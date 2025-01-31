@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+{% block title %}Write a Review{% endblock %}
+
+{% block content %}
+<div class="section-review-form-page">
+    <h1 class="mt-4">{{ view.title }}</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Review Text Field -->
+        <div class="mb-3">
+            <label for="review_text" class="form-label">Your Review</label>
+            {{ form.review_text }}
+        </div>
+        
+        <!-- Rating Field -->
+        <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            {{ form.rating }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

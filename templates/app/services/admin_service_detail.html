@@ -1,0 +1,21 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block title %}Service Details{% endblock %}
+
+{% block content %}
+<div class="section-admin-service-detail-page">
+    <h1>Service: {{ service.name }}</h1>
+    <p><strong>Category:</strong> {{ service.category.name }}</p>
+    <p><strong>Description:</strong> {{ service.description }}</p>
+    <p><strong>Price:</strong> ₱{{ service.price }}</p>
+    
+    {% if service.image %}
+    <p><strong>Image:</strong></p>
+    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="img-fluid">
+    {% endif %}
+
+    <a href="{% url 'admin-service-update' service.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'admin-service-delete' service.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'admin-service-list' %}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}

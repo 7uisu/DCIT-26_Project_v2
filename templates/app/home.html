@@ -1,0 +1,134 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Cavite Skin Solutions{% endblock %}
+
+{% block content %}
+<!-- Home Section -->
+<div id="section1">
+    <!-- Background Image -->
+    <div class="section1-background">
+        <img src="{% static 'images/Green_BG.png' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="section1-overlay"></div>
+
+    <!-- Content -->
+    <div class="section1-content fade-in">
+        <!-- Home Main Text -->
+        <div class="home-main-text">
+            <h1>Your Trusted</h1>
+            <h1>Partner In</h1>
+            <h1>Skin Health</h1>
+
+            
+        </div>
+        
+        <!-- Learn More Button -->
+        <div class="learn-more-button">
+            <a href="#section2" class="learn-more-btn">Learn More</a>
+        </div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<div id="section2" class="services-section">
+    <h2 class="section-title">Our Services</h2>
+
+    <!-- Service Categories Tabs -->
+    <div class="service-tabs">
+        {% for category in categories|slice:":3" %}
+            <button class="tab-btn {% if forloop.first %}active{% endif %}" data-category-id="{{ category.id }}">{{ category.name }}</button>
+        {% endfor %}
+        <a href="{% url 'service-category-list' %}" class="tab-btn view-all-categories-link">View All Categories</a>
+    </div>
+
+    <!-- Services List -->
+    <div class="services-list">
+        {% for category in categories|slice:":3" %}
+            <div class="service-category-section {% if not forloop.first %}hidden{% endif %}" id="category-{{ category.id }}">
+                {% for service in category.services.all|slice:":3" %}
+                    <div class="service-card">
+                        <img src="{% if service.image %}{{ service.image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" alt="{{ service.name }}">
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.description }}</p>
+                        <a href="{% url 'service-detail' service.pk %}" class="learn-more-link">Learn More →</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- View All Services -->
+    <div class="view-all-services">
+        <a href="{% url 'service-list' %}" class="view-all-btn">See our full list of Services</a>
+    </div>
+</div>
+
+
+<!-- Testimonials Section -->
+<div id="section3">
+    <!-- Background Image -->
+    <div class="section3-background">
+        <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="section3-overlay"></div>
+
+    <!-- Testimonials Content -->
+    <div class="testimonial-container">
+        <div class="testimonial-card">
+            <!-- Title and Subtitle -->
+            <h2 class="testimonial-title">Testimonials</h2>
+            <p class="testimonial-subtitle">What others have to say about us</p>
+
+            <!-- Testimonial Carousel -->
+            <div class="testimonial-carousel">
+                <!-- Carousel Buttons Inside the Card -->
+                <button class="testimonial-carousel-btn testimonial-prev-btn">&#8249;</button>
+
+                <!-- Testimonial Content Container -->
+                <div class="testimonial-content">
+                    {% for review in clinic_reviews %}
+                    <div class="testimonial-item">
+                        <div class="testimonial-photo-container">
+                            <img src="{{ review.patient.profile_picture.url }}" alt="Reviewer Photo" class="reviewer-photo">
+                        </div>
+                        <div class="testimonial-details">
+                            <p class="testimonial-text">{{ review.review_text }}</p>
+                            <p class="reviewer-name">{{ review.patient.user.first_name }} {{ review.patient.user.last_name }}</p>  <!-- Updated -->
+                            <div class="reviewer-rating">
+                                {% for i in review.rating|to %}
+                                    &#9733;
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No reviews yet.</p>
+                {% endfor %}
+                
+                </div>
+
+                <button class="testimonial-carousel-btn testimonial-next-btn">&#8250;</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Booking Section -->
+<div id="section4">
+    <div class="to-booking-section fade-in">
+        <div class="booking-section-container fade-in">
+            <p class="booking-section-text fade-in">GET THE CARE YOU DESERVE</p>
+            <h2 class="fade-in">SCHEDULE YOUR <br> CONSULTATION TODAY</h2>
+            <a href="#" class="booking-section-button fade-in">Book Now</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

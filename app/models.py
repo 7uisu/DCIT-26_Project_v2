@@ -5,60 +5,58 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db.models import Q
 
-# CountryofBirth model (kept separate, not connected to Region)
+# CountryOfBirth model
 class CountryOfBirth(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
 
-# Region model (not connected to Country)
+# Region model
 class Region(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
 
-# Province model (connected to Region)
+# Province model
 class Province(models.Model):
     name = models.CharField(max_length=100)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='provinces')
 
     def __str__(self):
-        return f"{self.name}, {self.region}"
+        return self.name
 
-# City/Municipality model (connected to Province)
+# CityMunicipality model
 class CityMunicipality(models.Model):
     name = models.CharField(max_length=100)
     province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='cities')
 
     def __str__(self):
-        return f"{self.name}, {self.province}"
+        return self.name
 
-# Barangay model (connected to City/Municipality)
+# Barangay model
 class Barangay(models.Model):
     name = models.CharField(max_length=100)
     city_municipality = models.ForeignKey(CityMunicipality, on_delete=models.CASCADE, related_name='barangays')
 
     def __str__(self):
-        return f"{self.name}, {self.city_municipality}"
+        return self.name
 
-# Postal Code model (connected to City/Municipality)
+# PostalCode model
 class PostalCode(models.Model):
     code = models.CharField(max_length=20, unique=True)
     city_municipality = models.ForeignKey(CityMunicipality, on_delete=models.CASCADE, related_name='postal_codes')
 
     def __str__(self):
-        return f"{self.code} ({self.city_municipality})"
+        return self.code
 
-# Patient model (extended User model)
+
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient_profile')  # One-to-one with User
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField(db_index=True)
-        
-    # Connects location models
+    date_of_birth = models.DateField(db_index=True, null=True, blank=True)
+
+    # Location models
     country = models.ForeignKey(CountryOfBirth, on_delete=models.SET_NULL, null=True, blank=True)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True)
     province = models.ForeignKey(Province, on_delete=models.SET_NULL, null=True, blank=True)
@@ -66,19 +64,22 @@ class Patient(models.Model):
     barangay = models.ForeignKey(Barangay, on_delete=models.SET_NULL, null=True, blank=True)
     postal_code = models.ForeignKey(PostalCode, on_delete=models.SET_NULL, null=True, blank=True)
 
-    # Unique address fields for each patient
+    # Address fields
     house_number_street = models.CharField(max_length=255, blank=True, null=True)
     subdivision = models.CharField(max_length=255, blank=True, null=True)
     
+    # Contact and profile fields
     contact_number = models.CharField(
         max_length=15,
-        validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")]
+        validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")],
+        blank=True,
+        null=True
     )
-    email = models.EmailField(unique=True, null=False, blank=False, db_index=True)
     profile_picture = models.ImageField(upload_to='patients/', blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user.first_name} {self.user.last_name}"  # Use the User fields
+
 
 
 # PatientRecord model, stores medical records for a patient: Connected to: Patient (ForeignKey).
@@ -171,60 +172,7 @@ class StaffPosition(models.Model):
 
     def __str__(self):
         return self.title
-
-# StaffProfile model, extends Django's User model to represent clinic staff members: User (One-to-One), StaffPosition (ForeignKey), StaffSchedule, Appointment, Consultation, DoctorReview (ForeignKey).
-class StaffProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='staff_profile')
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField()
-    contact_number = models.CharField(
-        max_length=15,
-        validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")]
-    )
-    email = models.EmailField(unique=True)
-    address = models.TextField(blank=True, null=True)
-    position = models.ForeignKey(StaffPosition, on_delete=models.SET_NULL, null=True, related_name='staff_members')
-    profile_picture = models.ImageField(upload_to='staff/', blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.position and self.position.group:
-            self.user.groups.add(self.position.group)
-        else:
-            self.user.groups.clear()
-
-    @property
-    def full_name(self):
-        return f"{self.first_name} {self.last_name}"
-
-    def __str__(self):
-        return self.user.username
-
-# StaffSchedule model, tracks working schedules of staff members: Tracks the working schedule of staff members: Connected to: StaffProfile (ForeignKey).
-class StaffSchedule(models.Model):
-    staff = models.ForeignKey(StaffProfile, on_delete=models.CASCADE, related_name='schedules')
-    day_of_week = models.CharField(max_length=10, choices=[
-        ('Monday', 'Monday'),
-        ('Tuesday', 'Tuesday'),
-        ('Wednesday', 'Wednesday'),
-        ('Thursday', 'Thursday'),
-        ('Friday', 'Friday'),
-        ('Saturday', 'Saturday'),
-    ])
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-
-    def clean(self):
-        if self.end_time <= self.start_time:
-            raise ValidationError("End time must be after start time.")
-
-    def working_hours(self):
-        return f"{self.day_of_week}: {self.start_time.strftime('%I:%M %p')} - {self.end_time.strftime('%I:%M %p')}"
-
-    def __str__(self):
-        return f"{self.staff} schedule for {self.day_of_week}"
-
+    
 # Service Category Model
 class ServiceCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -232,7 +180,6 @@ class ServiceCategory(models.Model):
 
     def __str__(self):
         return self.name
-
 
 # Service Model
 class Service(models.Model):
@@ -263,10 +210,60 @@ class AppointmentStatus(models.Model):
     def __str__(self):
         return self.name
 
+class StaffProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='staff_profile')
+    date_of_birth = models.DateField()
+    contact_number = models.CharField(
+        max_length=15,
+        validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")]
+    )
+    address = models.TextField(blank=True, null=True)
+    position = models.ForeignKey(StaffPosition, on_delete=models.SET_NULL, null=True, related_name='staff_members')
+    profile_picture = models.ImageField(upload_to='staff/', blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # Add user to group corresponding to staff position
+        if self.position and self.position.group:
+            self.user.groups.add(self.position.group)
+        else:
+            self.user.groups.clear()
+
+    @property
+    def full_name(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+
+    def __str__(self):
+        return self.user.username
+
+    
+class StaffSchedule(models.Model):
+    staff = models.ForeignKey(StaffProfile, on_delete=models.CASCADE, related_name='schedules')  # Keeping the ForeignKey here
+    day_of_week = models.CharField(max_length=10, choices=[
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday'),
+        ('Saturday', 'Saturday'),
+    ])
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    def clean(self):
+        if self.end_time <= self.start_time:
+            raise ValidationError("End time must be after start time.")
+
+    def working_hours(self):
+        return f"{self.day_of_week}: {self.start_time.strftime('%I:%M %p')} - {self.end_time.strftime('%I:%M %p')}"
+
+    def __str__(self):
+        return f"{self.staff} schedule for {self.day_of_week}"
+
 # Appointment Model
 class Appointment(models.Model):
-    patient = models.ForeignKey('Patient', on_delete=models.CASCADE, related_name="appointments")
-    doctor = models.ForeignKey('StaffProfile', on_delete=models.CASCADE, related_name="appointments")
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="appointments")
+    doctor = models.ForeignKey(StaffProfile, on_delete=models.CASCADE, related_name="appointments")
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     reason_for_visit = models.CharField(max_length=255, blank=True, null=True)  # Optional if service explains the visit
@@ -317,6 +314,22 @@ class Consultation(models.Model):
 
     def __str__(self):
         return f"Consultation for {self.appointment.patient} with {self.appointment.doctor} on {self.consultation_date}"
+    
+class ClinicReview(models.Model):
+    # Link to the patient who left the review
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='clinic_reviews')
+    
+    # The text of the review
+    review_text = models.TextField(help_text="The written review of the clinic")
+    
+    # Rating from 1 to 5
+    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 6)], help_text="Rating from 1 (lowest) to 5 (highest).")
+    
+    # Date when the review was created
+    date = models.DateTimeField(auto_now_add=True, help_text="The date the review was created.")
+    
+    def __str__(self):
+        return f"Review by {self.patient} - {self.rating} stars"
     
 
 # Prescription model, tracks medications prescribed to patients during appointments: Connected to: Patient (ForeignKey), Appointment (ForeignKey, optional).
@@ -369,119 +382,73 @@ class Billing(models.Model):
         super().save(*args, **kwargs)
 
 
-# DoctorReview model, stores patient reviews and ratings for doctors: Connected to: StaffProfile (ForeignKey, doctor), Patient (ForeignKey).
-# ***Consultation Review Dapat***
-class ConsultationReview(models.Model):
-    consultation = models.OneToOneField(Consultation, on_delete=models.CASCADE, related_name='review', help_text="The consultation being reviewed.")  # Link to Consultation
-    doctor = models.ForeignKey(StaffProfile, on_delete=models.CASCADE, related_name='consultation_reviews', help_text="The doctor involved in the consultation.")  # Link to the doctor from the consultation
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='consultation_reviews', help_text="The patient who is reviewing the consultation.")  # Link to the patient
-    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 6)], help_text="Rating from 1 (lowest) to 5 (highest).")  # Rating scale
-    review = models.TextField(help_text="The written review of the consultation.")
-    date = models.DateTimeField(auto_now_add=True, help_text="The date the review was created.")
-
-    def clean(self):
-        # Ensure the doctor in the review matches the doctor in the consultation
-        if self.consultation.appointment.doctor != self.doctor:
-            raise ValidationError("The doctor in the review must match the doctor from the consultation.")
-
-        # Ensure the patient in the review matches the patient in the consultation
-        if self.consultation.appointment.patient != self.patient:
-            raise ValidationError("The patient in the review must match the patient from the consultation.")
-
-    def __str__(self):
-        return f"Review by {self.patient} for Dr. {self.doctor} on {self.consultation.consultation_date}"
-
-# NotificationType model: Represents a predefined notification type.
-class NotificationType(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    default_message = models.TextField(blank=True, null=True)  # Optional default message
-
-    def __str__(self):
-        return self.name
-
-# Notification model: Represents notifications for users, connected to a NotificationType.
-class Notification(models.Model):
-    notification_type = models.ForeignKey(NotificationType, on_delete=models.SET_NULL, null=True)
-    patient = models.ForeignKey('Patient', on_delete=models.CASCADE, related_name='notifications')  # Directly linked to Patient
-    message = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    read = models.BooleanField(default=False)
-    appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE, null=True, blank=True)
-    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE, null=True, blank=True)
-    consultation = models.ForeignKey(Consultation, on_delete=models.CASCADE, null=True, blank=True)
-    billing = models.ForeignKey(Billing, on_delete=models.CASCADE, null=True, blank=True)
-    related_url = models.URLField(max_length=255, blank=True, null=True)
-
-    is_deleted = models.BooleanField(default=False)  # Soft delete flag
-
-    def delete(self, *args, **kwargs):
-        self.is_deleted = True
-        self.save()
-
-    def save(self, *args, **kwargs):
-        if not self.message and self.notification_type:
-            self.message = self.notification_type.default_message
-        super().save(*args, **kwargs)
-
-    @classmethod
-    def mark_all_as_read(cls, patient):
-        cls.objects.filter(patient=patient, read=False, is_deleted=False).update(read=True)
-
-    def mark_as_read(self):
-        self.read = True
-        self.save()
-
-    def __str__(self):
-        return f"Notification for {self.patient.user.username} - {self.message[:20]}..."
 
 
+# # DoctorReview model, stores patient reviews and ratings for doctors: Connected to: StaffProfile (ForeignKey, doctor), Patient (ForeignKey).
+# # ***Consultation Review Dapat***
+# class ConsultationReview(models.Model):
+#     consultation = models.OneToOneField(Consultation, on_delete=models.CASCADE, related_name='review', help_text="The consultation being reviewed.")  # Link to Consultation
+#     doctor = models.ForeignKey(StaffProfile, on_delete=models.CASCADE, related_name='consultation_reviews', help_text="The doctor involved in the consultation.")  # Link to the doctor from the consultation
+#     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='consultation_reviews', help_text="The patient who is reviewing the consultation.")  # Link to the patient
+#     rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 6)], help_text="Rating from 1 (lowest) to 5 (highest).")  # Rating scale
+#     review = models.TextField(help_text="The written review of the consultation.")
+#     date = models.DateTimeField(auto_now_add=True, help_text="The date the review was created.")
 
-# Supplier model, tracks the suppliers of inventory items: Connected to: Inventory (ForeignKey).
-class Supplier(models.Model):
-    name = models.CharField(max_length=100)
-    contact_info = models.TextField()  # Supplier contact information
-    supply_type = models.CharField(max_length=100)  # Type of supplies provided
+#     def clean(self):
+#         # Ensure the doctor in the review matches the doctor in the consultation
+#         if self.consultation.appointment.doctor != self.doctor:
+#             raise ValidationError("The doctor in the review must match the doctor from the consultation.")
 
-    def __str__(self):
-        return self.name
+#         # Ensure the patient in the review matches the patient in the consultation
+#         if self.consultation.appointment.patient != self.patient:
+#             raise ValidationError("The patient in the review must match the patient from the consultation.")
 
-# Inventory model, tracks items (e.g., medical supplies) used in the clinic: Connected to: Supplier (ForeignKey), InventoryTransaction (ForeignKey).
-class Inventory(models.Model):
-    item_name = models.CharField(max_length=100)  # Name of the item
-    description = models.TextField(blank=True, null=True)  # Optional description of the item
-    quantity = models.PositiveIntegerField()  # Current stock quantity
-    supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True, related_name='supplies')  # Linked supplier
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2)  # Price per unit
-    reorder_level = models.PositiveIntegerField(default=0)  # Stock level at which to reorder
-    item_image = models.ImageField(upload_to='inventory/', blank=True, null=True)  # Item image (optional)
+#     def __str__(self):
+#         return f"Review by {self.patient} for Dr. {self.doctor} on {self.consultation.consultation_date}"
 
-    def __str__(self):
-        return f"{self.item_name} (Qty: {self.quantity})"
+# # NotificationType model: Represents a predefined notification type.
+# class NotificationType(models.Model):
+#     name = models.CharField(max_length=100)
+#     description = models.TextField(blank=True, null=True)
+#     default_message = models.TextField(blank=True, null=True)  # Optional default message
 
-    def is_below_reorder_level(self):
-        return self.quantity <= self.reorder_level
+#     def __str__(self):
+        # return self.name
 
-# TransactionType model, Represents predefined types of inventory transactions, e.g., "inflow" or "outflow":Connected to: InventoryTransaction (ForeignKey).
-class TransactionType(models.Model):
-    name = models.CharField(max_length=50)
-    description = models.TextField(blank=True, null=True)
-    
-    def __str__(self):
-        return self.name
+# # Notification model: Represents notifications for users, connected to a NotificationType.
+# class Notification(models.Model):
+#     notification_type = models.ForeignKey(NotificationType, on_delete=models.SET_NULL, null=True)
+#     patient = models.ForeignKey('Patient', on_delete=models.CASCADE, related_name='notifications')  # Directly linked to Patient
+#     message = models.TextField(blank=True, null=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     read = models.BooleanField(default=False)
+#     appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE, null=True, blank=True)
+#     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE, null=True, blank=True)
+#     consultation = models.ForeignKey(Consultation, on_delete=models.CASCADE, null=True, blank=True)
+#     billing = models.ForeignKey(Billing, on_delete=models.CASCADE, null=True, blank=True)
+#     related_url = models.URLField(max_length=255, blank=True, null=True)
 
-# Inventory Transaction model, logs usage or movement of inventory items: Connected to: Inventory (ForeignKey), TransactionType (ForeignKey).
-class InventoryTransaction(models.Model):
-    item = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='transactions')  # Linked to Inventory
-    quantity_used = models.PositiveIntegerField()  # Amount used
-    date = models.DateTimeField(auto_now_add=True)  # When the transaction occurred
-    reason = models.TextField()  # Why the item was used
-    notes = models.TextField(blank=True, null=True)  # Optional notes about the transaction
-    transaction_type = models.ForeignKey(TransactionType, on_delete=models.SET_NULL, null=True)
+#     is_deleted = models.BooleanField(default=False)  # Soft delete flag
 
-    def __str__(self):
-        return f"{self.quantity_used} of {self.item} on {self.date}"
+#     def delete(self, *args, **kwargs):
+#         self.is_deleted = True
+#         self.save()
 
+#     def save(self, *args, **kwargs):
+#         if not self.message and self.notification_type:
+#             self.message = self.notification_type.default_message
+#         super().save(*args, **kwargs)
+
+#     @classmethod
+#     def mark_all_as_read(cls, patient):
+#         cls.objects.filter(patient=patient, read=False, is_deleted=False).update(read=True)
+
+#     def mark_as_read(self):
+#         self.read = True
+#         self.save()
+
+#     def __str__(self):
+#         return f"Notification for {self.patient.user.username} - {self.message[:20]}..."
 
 
 # Skin Condition Analysis Model, allows patients to upload images for AI-based skin condition analysis: Connected to: Patient (ForeignKey),

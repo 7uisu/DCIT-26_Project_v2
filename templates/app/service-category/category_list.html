@@ -1,0 +1,73 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="category-list-page">
+
+    <!-- Background Image -->
+    <div class="category-list-page-background">
+        <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="category-list-page-overlay"></div>
+
+    <!-- Category Display Container -->
+    <div class="category-list-page-container">
+        <h1>Service Categories</h1>
+
+        <!-- Category List -->
+        <div class="category-list-page-list">
+            {% for category in categories %}
+                <a href="{% url 'service-category-detail' category.pk %}" class="category-list-page-card">
+                    <h3>{{ category.name }}</h3>
+                    <p>{{ category.description|default:"No description available." }}</p>
+                </a>
+            {% empty %}
+                <p class="no-category">No categories found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+<!--
+
+<div class="category-list-page">
+
+
+    <div class="category-list-page-background">
+      <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+  </div>
+
+
+  <div class="category-list-page-overlay"></div>
+
+
+  <div class="category-list-page-container">
+      <h1>Service Categories</h1>
+      <a href="{% url 'service-category-create' %}" class="add-new-category-link">Add New Category</a>
+
+
+      <div class="category-list-page-list">
+          {% for category in categories %}
+              <a href="{% url 'service-category-detail' category.pk %}" class="category-list-page-card">
+                  <h3>{{ category.name }}</h3>
+                  <p>{{ category.description|default:"No description available." }}</p>
+                  <div class="category-actions">
+                      <span class="view-btn">View</span>
+                      <a href="{% url 'service-category-update' category.pk %}" class="edit-btn">Edit</a>
+                      <a href="{% url 'service-category-delete' category.pk %}" class="delete-btn">Delete</a>
+                  </div>
+              </a>
+          {% empty %}
+              <p class="no-category">No categories found.</p>
+          {% endfor %}
+      </div>
+  </div>
+
+</div>
+-->
+

@@ -1,0 +1,20 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% block title %}Delete Review{% endblock %}
+
+{% block content %}
+<div class="section-admin-review-confirm-delete-page">
+    <h1 class="mt-4 text-danger">Are you sure you want to delete this review?</h1>
+    
+    <div class="review-details">
+        <p><strong>Review:</strong> "{{ reviews-details.review_text }}"</p>
+        <p><strong>Rating:</strong> {{ reviews-details.rating }} ⭐</p>
+        <p><strong>Patient:</strong> {{ reviews-details.patient }}</p>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete Review</button>
+        <a href="{% url 'clinic-review-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

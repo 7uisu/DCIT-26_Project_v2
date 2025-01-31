@@ -1,0 +1,40 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-medical-history-page">
+    <div class="section-medical-history-list-page">
+        <h1>Medical Histories</h1>
+        <a href="{% url 'admin-medical-history-create' %}" class="btn btn-primary">Add New Medical History</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Conditions</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for history in medical_history_list %}
+                    <tr>
+                        <td>{{ history.patient_record.patient }}</td>
+                        <td>
+                            {% for condition in history.conditions.all %}
+                                <span>{{ condition.name }}</span>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ history.start_date }}</td>
+                        <td>{{ history.end_date|default:"Ongoing" }}</td>
+                        <td>
+                            <a href="{% url 'admin-medical-history-detail' history.pk %}" class="btn btn-info">View</a>
+                            <a href="{% url 'admin-medical-history-update' history.pk %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'admin-medical-history-delete' history.pk %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

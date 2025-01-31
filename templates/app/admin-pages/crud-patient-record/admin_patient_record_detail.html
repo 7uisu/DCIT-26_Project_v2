@@ -1,0 +1,13 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-patient-record-detail-page">
+    <h1>Patient Record for {{ patient_record.patient }}</h1>
+    <p><strong>Diagnosis:</strong> {{ patient_record.diagnosis }}</p>
+    <p><strong>Treatment Plan:</strong> {{ patient_record.treatment_plan }}</p>
+    <p><strong>Date Recorded:</strong> {{ patient_record.date_recorded }}</p>
+    <a href="{% url 'admin-patient-record-update' patient_record.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'admin-patient-record-delete' patient_record.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'admin-patient-records' %}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}

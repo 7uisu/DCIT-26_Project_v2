@@ -1,0 +1,14 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-medical-condition-delete-confirmation-page">
+    <h1>Are you sure you want to delete the medical condition: {{ medical_condition.name }}?</h1>
+    <p><strong>Description:</strong> {{ medical_condition.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm Deletion</button>
+        <a href="{% url 'admin-medical-conditions' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

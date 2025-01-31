@@ -1,0 +1,63 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="service-list-page">
+
+    <!-- Background Image -->
+    <div class="service-list-page-background">
+        <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="service-list-page-overlay"></div>
+
+    <!-- Profile Display Container -->
+    <div class="service-list-page-container">
+        <h1>Service List</h1>
+
+        <!-- Service Categories Tabs -->
+        <div class="service-list-page-tabs">
+            {% for category in categories %}
+                <button class="service-list-page-tab-btn {% if forloop.first %}active{% endif %}" data-category-id="{{ category.id }}">{{ category.name }}</button>
+            {% endfor %}
+        </div>
+        
+        <!-- Services List -->
+        <div class="service-list-page-list">
+            {% for category in categories %}
+                <div class="service-list-page-category-section {% if not forloop.first %}hidden{% endif %}" id="category-{{ category.id }}">
+                    {% for service in category.services.all %}
+                        <div class="service-list-page-card">
+                            <img src="{% if service.image %}{{ service.image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" alt="{{ service.name }}">
+                            <h3>{{ service.name }}</h3>
+                            <p>{{ service.description }}</p>
+                            <a href="{% url 'service-detail' service.pk %}" class="service-list-page-learn-more-link">Learn More →</a>
+                        </div>
+                    {% empty %}
+                        <p>No services available in this category.</p>
+                    {% endfor %}
+                </div>
+            {% empty %}
+                <p>No categories found.</p>
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+
+
+<!--
+<h1>Service List</h1>
+<a href="{% url 'service-create' %}">Add New Service</a>
+<ul>
+    {% for service in services %}
+    <li>
+        <a href="{% url 'service-detail' service.id %}">{{ service.name }}</a>
+        (<a href="{% url 'service-update' service.id %}">Edit</a>,
+        <a href="{% url 'service-delete' service.id %}">Delete</a>)
+    </li>
+    {% endfor %}
+</ul>
+-->

@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+<div class="category-detail-page">
+
+    <!-- Background Image -->
+    <div class="category-detail-page-background">
+        <img src="{% static 'images/pexels-oles-kanebckuu-34911-127873.jpg' %}" alt="Background Image" class="background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="category-detail-page-overlay"></div>
+
+    <!-- Profile Display Container -->
+    <div class="category-detail-page-container">
+  
+        <h2>{{ category.name }}</h2>
+        <p>{{ category.description }}</p>
+
+        <h3>Services in this category:</h3>
+
+        <div class="category-detail-page-service-list">
+            {% for service in category.services.all %}
+                <a href="{% url 'service-detail' service.pk %}" class="category-detail-page-service-card">
+                    <img src="{{ service.image.url }}" alt="{{ service.name }}">
+                    <h4>{{ service.name }}</h4>
+                    <p>${{ service.price }}</p>
+                </a>
+            {% empty %}
+                <p>No services in this category yet.</p>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'service-category-list' %}" class="category-detail-page-back-btn">Back to Categories List</a>
+    </div>
+</div>
+{% endblock %}

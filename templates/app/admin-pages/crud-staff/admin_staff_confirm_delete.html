@@ -1,0 +1,16 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block title %}Delete Staff{% endblock %}
+
+{% block content %}
+<div class="section-admin-staff-confirm-delete-page">
+<h1>Are you sure you want to delete this staff member?</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+
+<a href="{% url 'admin-staff-management' %}" class="btn btn-secondary mt-3">Cancel</a>
+</div>
+{% endblock %}

@@ -20,8 +20,10 @@ DEBUG: bool = env.bool('DEBUG', default=True)  # Retrieve DEBUG value from .env
 
 ALLOWED_HOSTS: List[str] = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
-
-# Application definition
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_REDIRECT_URL = 'home'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -31,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +51,7 @@ ROOT_URLCONF = 'Barrago.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/ 'app/templates'],
+        'DIRS': [BASE_DIR/ 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -56,6 +59,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context_processors.is_admin_or_it_staff',
+                'app.views.navbar_view',
             ],
         },
     },
@@ -114,6 +119,16 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-email@gmail.com'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')  # Load from .env
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Load from .env
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

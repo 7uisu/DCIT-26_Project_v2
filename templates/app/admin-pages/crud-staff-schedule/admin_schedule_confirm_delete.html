@@ -1,0 +1,17 @@
+{% extends 'app/admin-pages/base_admin.html' %}
+{% load static %}
+{% block content %}
+<div class="section-admin-schedule-confirm-delete-page">
+<h2>Are you sure you want to delete this schedule?</h2>
+<p><strong>Staff:</strong> {{ object.staff }}</p>
+<p><strong>Day of the Week:</strong> {{ object.day_of_week }}</p>
+<p><strong>Start Time:</strong> {{ object.start_time }}</p>
+<p><strong>End Time:</strong> {{ object.end_time }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+<a href="{% url 'admin-staff-schedule' %}">Cancel</a>
+</div>
+{% endblock %}
